@@ -1,0 +1,35 @@
+import { NextResponse } from 'next/server'
+import SpotifyProvider from "services/SpotifyProvider"
+
+export async function GET(request, context) {
+  const { status, value: bearer } = await SpotifyProvider.getToken(request)
+
+  if (status !== 200) {
+    return NextResponse.json({}, { status })
+  }
+
+  const { searchParams } = new URL(request.url)
+
+  const categoryId = context.params.id
+  const country = searchParams.get('country') || 'IT'
+  const locale = searchParams.get('locale') || 'IT_it'
+  const offset = searchParams.get('offset') || 0
+  const limit = searchParams.get('limit') || 10
+
+  let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}browse/categories/${categoryId}/playlists`
+  url += `?country=${country}`
+  url += `&locale=${locale}`
+  url += `&offset=${offset}`
+  url += `&limit=${limit}`
+
+  const res = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${bearer}`
+    }
+  })
+    .then((resp) => {
+      return resp
+    })
+
+  return NextResponse.json(await res.json())
+}

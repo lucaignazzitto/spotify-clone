@@ -1,0 +1,12 @@
+.TopTracksList {
+  position: relative;
+  height: 100%;
+
+  &Wrapp {
+    position: relative;
+
+    &Track {
+      margin-bottom: 20px;
+    }
+  }
+}
