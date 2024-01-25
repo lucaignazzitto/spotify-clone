@@ -1,0 +1,20 @@
+@import "@/styles/breakpoints.scss";
+
+.artist-page {
+  .track {
+    &-position {
+      @include media-breakpoint-down (sm) {
+        display: none;
+      }
+    }
+    .track-inner {
+      &-placeholder {
+        flex-basis: 75px;
+      }
+
+      &-content {
+        margin-left: -40px;
+      }
+    }
+  }
+}

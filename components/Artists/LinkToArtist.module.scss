@@ -1,0 +1,9 @@
+.LinkToArtistWrapp {
+  position: relative;
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+@import "@/styles/variables.scss";
+
+.meWrapp {
+  position: relative;
+
+  &Info {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background-color: #4e4e4e;
+      border-radius: 50%;
+      overflow: hidden;
+      transform: scale(1);
+      backdrop-filter: blur(4px);
+      transition: transform 200ms ease;
+    }
+
+    &:hover {
+      &::after {
+        transform: scale(1.06);
+        transition: transform 200ms ease;
+      }
+    }
+    
+    &Image {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      z-index: 2;
+    }
+  }
+}
