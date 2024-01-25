@@ -1,7 +1,7 @@
 This is a simple project to handle and play with Spotify apis. [Demo here](https://new-spotify-two.vercel.app)
 
 ## Demo
-[![App demo](https://github.com/lucaignazzitto/new-spotify/blob/develop/public/presentation/Cover.jpg?raw=true)](https://new-spotify-two.vercel.app)
+[![App demo](https://github.com/lucaignazzitto/spotify-clone/blob/develop/public/presentation/Cover.jpg?raw=true)](https://new-spotify-two.vercel.app)
 
 
 ## Requirements
@@ -19,5 +19,5 @@ Plus, to enable lyrics create app on developer.musixmatch.com
 ## More
 Feel free to improve it
 
-[![Cover 1](https://github.com/lucaignazzitto/new-spotify/blob/develop/public/presentation/Cover%20%E2%80%93%201.jpg?raw=true)](https://new-spotify-two.vercel.app)
-[![Cover 2](https://github.com/lucaignazzitto/new-spotify/blob/develop/public/presentation/Cover%20%E2%80%93%202.jpg?raw=true)](https://new-spotify-two.vercel.app)
+[![Cover 1](https://github.com/lucaignazzitto/spotify-clone/blob/develop/public/presentation/Cover%20%E2%80%93%201.jpg?raw=true)](https://new-spotify-two.vercel.app)
+[![Cover 2](https://github.com/lucaignazzitto/spotify-clone/blob/develop/public/presentation/Cover%20%E2%80%93%202.jpg?raw=true)](https://new-spotify-two.vercel.app)
