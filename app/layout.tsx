@@ -20,6 +20,11 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
   },
   description: APP_DESCRIPTION,
+  openGraph: {
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    images: "/opengraph-image.jpg",
+  },
   manifest: "/public/manifest.json",
   appleWebApp: {
     capable: true,
