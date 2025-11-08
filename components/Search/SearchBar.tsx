@@ -1,6 +1,6 @@
 "use client"
 import debounce from 'lodash/debounce'
-import { useCallback, useOptimistic, useTransition } from 'react'
+import { useCallback, useEffect, useMemo, useOptimistic, useTransition } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FormControl } from 'react-bootstrap'
 
@@ -23,7 +23,7 @@ export default function SearchBar({
 
   const [, setOptimisticKeyword] = useOptimistic<string>(value)
 
-  const makeSearch = useCallback(debounce((inputValue) => {
+  const debouncedSearch = useMemo(() => debounce((inputValue) => {
     if (useUrlToStore) {
       startTransition(() => {
         setOptimisticKeyword(inputValue)
@@ -34,12 +34,20 @@ export default function SearchBar({
     } else {
       onChange(inputValue)
     }
-  }, 600), [])
+  }, 600), [useUrlToStore, searchParams, replace, onChange, setOptimisticKeyword])
+
+  const makeSearch = useCallback((inputValue: string) => {
+    debouncedSearch(inputValue)
+  }, [debouncedSearch])
 
   const searchHandler = (e) => {
     const inputValue = e.target.value
     makeSearch(inputValue)
   }
+
+  useEffect(() => {
+    return () => debouncedSearch.cancel()
+  }, [debouncedSearch])
 
   return (
     <>

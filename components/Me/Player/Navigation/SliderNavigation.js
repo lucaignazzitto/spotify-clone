@@ -106,14 +106,14 @@ const SliderNavigation = ({
 
   useEffect(() => {
     editSlideByKey(0)
-  }, [swiperInstance])
+  }, [editSlideByKey, swiperInstance])
 
   useEffect(() => {
     if (swiperInstance) {
       !internallyHandled && swiperInstance.slideNext(300, false)
       editSlideByKey()
     }
-  }, [track?.name])
+  }, [internallyHandled, editSlideByKey, track?.name, swiperInstance])
 
   return (
     <div className={style.SliderNavigation}>

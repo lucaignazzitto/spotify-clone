@@ -26,7 +26,8 @@ export default function LikeButton({
   className = "",
   type = "track",
   animate = true,
-  onClick = () => { }
+  onClick = () => { },
+  ...props
 }: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
@@ -44,7 +45,7 @@ export default function LikeButton({
         setIsLiked(liked)
         return res
       })
-  }, [ids])
+  }, [type, ids])
 
 
   const handleClick = (e: MouseEvent) => {
@@ -79,7 +80,7 @@ export default function LikeButton({
   }, [checkForLike])
 
   return (
-    <button type="button" className={`btn btn-none btn-like ${animate ? 'hover-anim' : ''} ${className}`} onClick={handleClick}>
+    <button type="button" className={`btn btn-none btn-like ${animate ? 'hover-anim' : ''} ${className}`} onClick={handleClick} {...props}>
       {
         loading ? <Spinner show={true} width={20} height={20} />
           : <>

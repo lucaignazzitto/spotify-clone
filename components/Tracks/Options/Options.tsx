@@ -122,7 +122,7 @@ function TrackOptions({ track, from = "album", playlistId }: Props) {
             : null
         }
         <li>
-          <LikeButton ids={track.id} label={<span>Add to liked song</span>} animate={false} className="as-li" />
+          <LikeButton ids={track.id} label={<span>Add to liked song</span>} animate={false} className="as-li" aria-label={`Save track ${track.name}`} />
         </li>
         <li onClick={() => copyUrl()}>
           <Icon id="copy" width={20} />

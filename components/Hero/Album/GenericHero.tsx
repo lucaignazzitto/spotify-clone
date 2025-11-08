@@ -56,7 +56,7 @@ export default function GenericAlbumHero ({ album, type = "album", showExtras = 
           <div className={style.GernericAlbumHeroWrapperControllers}>
             { showPlay &&
               <div className={style.GernericAlbumHeroWrapperControllersLine}>
-                <PlayPause element={album} />
+                <PlayPause element={album} aria-label={`Play album ${album.name}`} />
               </div>
             }
             {
@@ -66,7 +66,7 @@ export default function GenericAlbumHero ({ album, type = "album", showExtras = 
               </div>
             }
             <div className={style.GernericAlbumHeroWrapperControllersLine}>
-              { type === "album" && showLike ? <LikeButton ids={album.id} type={type} /> : null }
+              { type === "album" && showLike ? <LikeButton ids={album.id} type={type} aria-label={`Save track ${album.name}`} /> : null }
             </div>
           </div>
         </>

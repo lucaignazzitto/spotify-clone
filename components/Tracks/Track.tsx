@@ -1,12 +1,11 @@
 'use client'
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import { millisToMinutesAndSeconds } from '@/utils/helpers'
 import Link from "next/link"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Icon from "@/components/Image/Icon"
 import LikeButton from '@/components/Buttons/Like'
-import ImageFit from "@/components/Image/Fit"
 import LinkToArtist from '@/components/Artists/LinkToArtist'
 import Options from "./Options/Options"
 import PlayPause from "@/components/Me/Player/PlayPause"
@@ -57,17 +56,11 @@ function Track({
   const [large, medium, small] = track?.album?.images || []
   const image = medium || large || small
 
-  const duration = useMemo(() => {
-    if (track?.duration_ms) {
-      return millisToMinutesAndSeconds(track.duration_ms)
-    } else {
-      return ''
-    }
-  }, [track?.duration_ms])
+  const duration = track?.duration_ms ? millisToMinutesAndSeconds(track.duration_ms) : ''
 
   useEffect(() => {
     showActive && setIsActive(playingTrack?.uri === track?.uri)
-  }, [showActive, player])
+  }, [showActive, player, playingTrack, track])
 
   return (
     Object.keys(track || {}).length ?
@@ -75,7 +68,7 @@ function Track({
         {
           showPlay &&
           <div className={style.trackWrappPlayer}>
-            <PlayPause element={track} parentUri={parentUri} size="small" />
+            <PlayPause element={track} parentUri={parentUri} size="small" aria-label={`Play ${track.name}`} />
           </div>
         }
         {
@@ -127,7 +120,7 @@ function Track({
             {
               showLike ?
                 <div className={`track-inner-content-like ${style.trackWrappInnerContentLike}`}>
-                  <LikeButton ids={track.id} />
+                  <LikeButton ids={track.id} aria-label={`Save track ${track.name}`} />
                 </div>
                 : null
             }

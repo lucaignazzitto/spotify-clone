@@ -21,21 +21,6 @@ export default function Volume({ deviceId, volume_percent = 0, direction = "vert
     setPlaybackVolume(valueToSet)
   }
 
-  const setPlaybackVolume = useCallback(debounce((volume) => {
-    setLoading(true)
-    handleSync(false)
-    return HttpProvider.put('/api/me/player/volume', {
-      device_id: deviceId,
-      volume_percent: volume
-    })
-      .finally(() => {
-        setLoading(false)
-        setTimeout(() => {
-          handleSync(true)
-        }, 500)
-      })
-  }, 600), [])
-
   const iconByVolume = useMemo(() => {
     let iconId = 'no-volume'
     if (currentVolume > 0 && currentVolume < 30) {
@@ -48,6 +33,28 @@ export default function Volume({ deviceId, volume_percent = 0, direction = "vert
     }
     return iconId
   }, [currentVolume])
+
+  const debouncedSetVolume = useMemo(() => debounce((volume) => {
+    setLoading(true)
+    handleSync(false)
+    return HttpProvider.put('/api/me/player/volume', {
+      device_id: deviceId,
+      volume_percent: volume
+    }).finally(() => {
+      setLoading(false)
+      setTimeout(() => {
+        handleSync(true)
+      }, 500)
+    })
+  }, 600), [deviceId, handleSync])
+
+  const setPlaybackVolume = useCallback((volume) => {
+    debouncedSetVolume(volume)
+  }, [debouncedSetVolume])
+
+  useEffect(() => {
+    return () => debouncedSetVolume.cancel()
+  }, [debouncedSetVolume])
 
 
   return (

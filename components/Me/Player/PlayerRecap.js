@@ -38,7 +38,7 @@ function PlayerRecap() {
             <LinkToArtist artists={track.artists} />
           </div>
           <div className={`${style.recapPlayerWrappContentTrackLike}`}>
-            <LikeButton ids={track.id} />
+            <LikeButton ids={track.id} aria-label={`Save track ${track.name}`} />
           </div>
         </div>
         <div className={`${style.recapPlayerWrappContentControllers}`}>

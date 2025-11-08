@@ -4,7 +4,6 @@ import Menu from '@/components/Sidebar/Menu'
 import HeaderNavigation from '@/components/Header/Navigation'
 import Player from '@/components/Me/Player/Player';
 import { SpotifyPlayerProvider } from '@/contexts/SpotifyPlayerContext';
-
 import '@/styles/global.scss'
 import { Metadata } from 'next';
 import { UserInterface } from '@/lib/models/user.interface';

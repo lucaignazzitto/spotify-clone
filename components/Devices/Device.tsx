@@ -16,9 +16,9 @@ interface DeviceProps {
 
 function Device({ device, showVolume = true, className = "" }: DeviceProps) {
   const { activeDevice, transferPlayback, isPlaying, handleSync } = useSpotifyPlayer()
-
   const [loading, setLoading] = useState(false)
-  const [isActive, setIsActive] = useState(device.is_active)
+
+  const isActive = activeDevice?.id === device.id;
 
   const switchToDevice = (e) => {
     e.preventDefault()
@@ -30,10 +30,6 @@ function Device({ device, showVolume = true, className = "" }: DeviceProps) {
         handleSync(true)
       })
   }
-
-  useEffect(() => {
-    setIsActive(activeDevice?.id === device.id)
-  }, [, activeDevice?.id])
 
   return (
     Object.keys(device).length ?

@@ -24,8 +24,8 @@ import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 function Player() {
   const { player = {}, track = {}, activeDevice, isPlaying } = useSpotifyPlayer();
   const [showRecap, setShowRecap] = useState(false)
-  const pathname = usePathname()
   const device = activeDevice
+  const pathname = usePathname()
 
   useEffect(() => {
     setShowRecap(false)

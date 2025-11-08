@@ -49,7 +49,7 @@ export default function Menu({ user, className = "" }: { user: UserInterface, cl
             <li className={`${style.SidebarMenuUlList} ${pathname === list.href ? style.SidebarMenuUlListActive : ''}`} key={list.name}>
               {
                 list.href ?
-                  <Link href={list.href} className='hover-anim' prefetch={list?.prefetch ?? true}>
+                  <Link href={list.href} className='hover-anim' prefetch={list?.prefetch ?? true} aria-label={list.name}>
                     <Icon id={list.iconId} />
                   </Link>
                   : <Icon id={list.iconId} />

@@ -15,7 +15,33 @@ type Props = {
   notFoundMessage?: string,
 }
 
-export default function Categories ({
+const CategoriesList = ({ categories, useAsSlide, itemsPerRow }) => {
+  if (useAsSlide) {
+    return (
+      <GenericSlider slidesPerView={itemsPerRow}>
+        {
+          categories.map((category, index) => (
+            <Category category={category} key={`slide-${index}`} />
+          ))
+        }
+      </GenericSlider>
+    )
+  } else {
+    return (
+      <Row>
+        {
+          categories.map((category, index) => (
+            <Col xs={6} sm={4} md={3} lg={12 / itemsPerRow} key={index}>
+              <Category category={category} key={`row-${index}`} />
+            </Col>
+          ))
+        }
+      </Row>
+    )
+  }
+}
+
+export default function Categories({
   useAsSlide = false,
   itemsPerRow = 4,
   categories = [],
@@ -25,41 +51,15 @@ export default function Categories ({
   notFoundMessage = "No categories found"
 }: Props) {
 
-  const CategoriesList = ({ categories }) => {
-    if (useAsSlide) {
-      return (
-        <GenericSlider slidesPerView={itemsPerRow}>
-          {
-            categories.map((category, index) => (
-              <Category category={category} key={`slide-${index}`}/>
-            ))
-          }
-        </GenericSlider>
-      )
-    } else {
-      return (
-        <Row>
-          {
-            categories.map((category, index) => (
-              <Col xs={6} sm={4} md={3} lg={ 12 / itemsPerRow} key={index}>
-                <Category category={category} key={`row-${index}`}/>
-              </Col>
-            ))
-          }
-        </Row>
-      )
-    }
-  }
-
   return (
     <div className={className}>
-      { title ? <div>{title}</div> : null }
+      {title ? <div>{title}</div> : null}
       {
         isLoading ? <ArtistLoader direction="horizontal" times={4} md={4} sm={3} xs={6} />
-        :
-        categories && categories.length ?
-          <CategoriesList categories={categories} />
-        : <p>{notFoundMessage}</p>
+          :
+          categories && categories.length ?
+            <CategoriesList categories={categories} useAsSlide={useAsSlide} itemsPerRow={itemsPerRow} />
+            : <p>{notFoundMessage}</p>
       }
     </div>
   )

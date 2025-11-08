@@ -11,10 +11,10 @@ import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 function DevicesButton ({ className = "", color = "" }) {
   const { activeDevice, devices, loadDevices } = useSpotifyPlayer()
   const [ loading, setLoading ] = useState(false)
-
+  
   const onDevicesToggle = (status) => {
     if (status) {
-      loadDevices()
+      getDevices()
     }
   }
 
@@ -25,10 +25,6 @@ function DevicesButton ({ className = "", color = "" }) {
         setLoading(false)
       })
   }
-
-  useEffect(() => {
-    getDevices()
-  }, [])
 
   return (
     <>

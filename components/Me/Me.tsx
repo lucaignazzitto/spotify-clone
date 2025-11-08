@@ -13,9 +13,7 @@ export default function Me ({ user, className = "" }: { user: UserInterface, cla
       {
         user && 'id' in user ?
         <div className={style.meWrapp}>
-          <Link href={{
-            pathname: `/profile/${user.id}`
-          }}>
+          <Link href={`/profile/${user.id}`} aria-label="Profile">
             <div className={style.meWrappInfo}>
               <Image src={profileImageUrl?.url} alt={`${user.display_name} profile image`} width={30} height={30} className={style.meWrappInfoImage} placeholder="blur" blurDataURL={mediaPlaceholder} loading="lazy" />
             </div>

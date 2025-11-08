@@ -42,7 +42,7 @@ function PlayingTrack ({ track = {}, showLike = true, isLoading = false, classNa
           {
             showLike ?
               <div className={`${style.PlayingTrackWrappInnerLike}`}>
-                <LikeButton ids={track.id} />
+                <LikeButton ids={track.id} aria-label={`Save track ${track.name}`} />
               </div>
             : null
           }

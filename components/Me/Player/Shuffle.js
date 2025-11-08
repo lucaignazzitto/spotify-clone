@@ -36,6 +36,7 @@ function ShuffleButton ({ className = "btn btn-none" }) {
     <Button
       className={`hover-anim ${className}`}
       disabled={!deviceId}
+      aria-label="Shuffle list"
       text={
         loading ? <Spinner show={true}  />
         : <Icon id='shuffle' color={shuffleState ? '#1ed760' : ''} />

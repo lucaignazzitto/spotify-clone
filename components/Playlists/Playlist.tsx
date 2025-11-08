@@ -24,7 +24,7 @@ export default function Playlist({ playlist }: Props) {
               placeholder="blur"
               blurDataURL={mediaPlaceholder}
             />
-            <PlayPause element={playlist} animate={false} className={style.playlistWrappInnerMediaPlayer} />
+            <PlayPause element={playlist} animate={false} className={style.playlistWrappInnerMediaPlayer} aria-label={`Play playlist ${playlist.name}`} />
           </div>
           <div className={style.playlistWrappInnerTitle}>
             {playlist.name} • {playlist.tracks.total} tracks

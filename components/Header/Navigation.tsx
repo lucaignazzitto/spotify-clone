@@ -25,12 +25,12 @@ export default function HeaderNavigation({ className = "" }: { className?: strin
         <div className={`${style.NavigationWrapperInnerCard} d-none d-lg-block`}>
           <div className={style.NavigationWrapperInnerCardNav}>
             <div className={style.NavigationWrapperInnerCardNavCta}>
-              <button className="btn btn-none hover-anim" onClick={(e) => goTo(e, 'back')}>
+              <button className="btn btn-none hover-anim" onClick={(e) => goTo(e, 'back')} aria-label='navigate back'>
                 <AppIcon id='left-arrow'></AppIcon>
               </button>
             </div>
             <div className={style.NavigationWrapperInnerCardNavCta}>
-              <button className="btn btn-none hover-anim" onClick={(e) => goTo(e, 'forward')}>
+              <button className="btn btn-none hover-anim" onClick={(e) => goTo(e, 'forward')} aria-label='navigate forward'>
                 <AppIcon id='right-arrow'></AppIcon>
               </button>
             </div>

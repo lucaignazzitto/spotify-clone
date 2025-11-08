@@ -44,6 +44,7 @@ function RepeatButton ({ className = "" }) {
     <Button
       className={`hover-anim ${className}`}
       disabled={!deviceId}
+      aria-label="Repeat song"
       text={
         loading ? <Spinner show={true}  />
         : <Icon id={statusLegend[repeatState].icon} />
