@@ -23,7 +23,7 @@ export default function ReleaseAlbum({ album, useType = false }: Props) {
           <Link href={`/albums/${album.id}`}>
             <Image src={image?.url} width={120} height={120} placeholder='blur' blurDataURL={mediaPlaceholder} loading="lazy" alt={`${album.name} Album cover `} className='img-fluid' />
           </Link>
-          <PlayPause element={album} animate={false} className={style.albumWrappInnerMediaPlayer} />
+          <PlayPause element={album} animate={false} className={style.albumWrappInnerMediaPlayer} aria-label={`Play album ${album.name}`} />
         </div>
         <div className={style.albumWrappInnerContent}>
           <Link href={`/albums/${album.id}`}>

@@ -32,6 +32,7 @@ function PreviousButton ({ className = "", refreshOnComplete = true }) {
     <Button
       className={`hover-anim ${className}`}
       disabled={!deviceId}
+      aria-label="Previous song"
       text={
         loading ? <Spinner show={true}  />
         : <Icon id='track-prev'></Icon>

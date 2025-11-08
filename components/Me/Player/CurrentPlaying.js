@@ -10,14 +10,8 @@ import style from "./Player.module.scss"
 
 export default function CurrentPlaying () {
   const pathname = usePathname()
-
-  const player = useMemo(() => {
-    return PlayerStore.getPlayer || {}
-  }, [PlayerStore.getPlayer])
-
-  const hasPlayer = useMemo(() => {
-    return Object.keys(PlayerStore.getPlayer).length > 0 || false
-  }, [PlayerStore.getPlayer])
+  const player = PlayerStore.getPlayer
+  const hasPlayer = Object.keys(PlayerStore.getPlayer).length > 0 || false
 
   const load = () => {
     return HttpProvider.get(`/api/me/player/currently-playing`, {

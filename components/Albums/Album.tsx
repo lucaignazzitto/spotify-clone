@@ -24,7 +24,7 @@ export default function Album({ album, useType = false }: Props) {
         <div className={style.albumWrappInner}>
           <div className={style.albumWrappInnerMedia}>
             <Image src={image?.url} width={600} height={600} placeholder='blur' blurDataURL={mediaPlaceholder} loading="lazy" alt={`${album.name} Album cover `}className='img-fluid' />
-            <PlayPause element={album} animate={false} className={style.albumWrappInnerMediaPlayer} />
+            <PlayPause element={album} animate={false} className={style.albumWrappInnerMediaPlayer} aria-label={`Play album ${album.name}`} />
           </div>
           <div className={style.albumWrappInnerTitle}>
             {album.name} • {album.total_tracks}

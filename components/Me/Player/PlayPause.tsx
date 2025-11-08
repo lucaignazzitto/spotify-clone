@@ -1,7 +1,6 @@
 'use client'
 import { observer } from "mobx-react-lite"
 import { useMemo, useState } from "react"
-import PlayerStore from "@/stores/PlayerStore"
 import Button from "@/components/Buttons/Button"
 import Icon from '@/components/Image/Icon'
 import Spinner from "@/components/Loader/Spinner"
@@ -36,7 +35,8 @@ function PlayPause({
   className = "",
   size = "normal",
   animate = true,
-  disabled = false
+  disabled = false,
+  ...props
 }: PlayPauseProps) {
 
   const { player, deviceId, isPlaying: spotifyIsPlaying, play: spotifyPlay, pause: spotifyPause } = useSpotifyPlayer() as any
@@ -117,6 +117,7 @@ function PlayPause({
         : <Icon id={ isPlaying ? 'track-play' : 'track-pause'}></Icon>
       }
       onClick={handleClick}
+      {...props}
     />
   )
 }

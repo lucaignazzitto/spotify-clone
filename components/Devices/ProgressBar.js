@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { millisToMinutesAndSeconds } from '@/utils/helpers'
 import debounce from 'lodash/debounce'
 import style from "./ProgressBar.module.scss"
@@ -19,14 +19,17 @@ function ProgressBar({ startAt = 0, max = 0, className = "" }) {
     setProgress(parseInt(value))
   }
 
-  const setProgress = useCallback(debounce((newProgress) => {
+  const debouncedSeek = useMemo(() => debounce((newProgress) => {
     handleSync(false)
-    seek(deviceId, newProgress)
-      .finally(() => {
-        handleSync(true)
-        setIsDragging(false)
-      })
+    seek(deviceId, newProgress).finally(() => {
+      handleSync(true)
+      setIsDragging(false)
+    })
   }, 100), [deviceId, seek, handleSync])
+
+  const setProgress = useCallback((newProgress) => {
+    debouncedSeek(newProgress)
+  }, [debouncedSeek])
 
   useEffect(() => {
     if (!isDragging && player?.is_playing) {
@@ -39,6 +42,8 @@ function ProgressBar({ startAt = 0, max = 0, className = "" }) {
 
     return () => clearInterval(intervalRef.current);
   }, [isDragging, player?.is_playing, max]);
+
+  useEffect(() => () => debouncedSeek.cancel(), [debouncedSeek])
 
 
   return (

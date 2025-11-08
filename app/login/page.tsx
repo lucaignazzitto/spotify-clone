@@ -5,6 +5,8 @@ import logo from "@/public/images/logo.svg"
 import Button from "@/components/Buttons/Button"
 import style from './Page.module.scss'
 import { useState } from "react"
+import Image from "next/image"
+import BackgroundHandler from "@/components/Backound/Handler"
 
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false)
@@ -28,10 +30,10 @@ export default function Login() {
 
   return (
     <div className={style.LoginPage}>
-      <div className={style.LoginPageBg} style={{ backgroundImage: `url(${loginBg.src})`}}></div>
+      <BackgroundHandler src={loginBg} className={style.LoginPageBg} />
       <div className={style.LoginPageForm}>
         <div className={style.LoginPageFormLogo}>
-          <img src={logo.src} />
+          <Image src={logo.src} width={40} height={40} alt="Spotify" />
         </div>
         <p className={style.LoginPageFormTitle}>You are not logged-in</p>
         <div className={style.LoginPageFormDescription}>

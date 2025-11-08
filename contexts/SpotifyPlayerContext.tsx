@@ -3,9 +3,7 @@ import { DeviceInterface } from "@/lib/models/devices.interface";
 import { PlayerInterface, PlayRequestParams } from "@/lib/models/player.interface";
 import { TrackInterface } from "@/lib/models/track.interface";
 import HttpProvider from "@/services/HttpProvider"
-import { createContext, useContext, useEffect, useState } from "react";
-
-let playerUpdater
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 interface SpotifyPlayer {
   player: PlayerInterface,
@@ -35,13 +33,14 @@ export function SpotifyPlayerProvider({ children }) {
   const [deviceId, setDeviceId] = useState<DeviceInterface['id']>(null);
   const [track, setTrack] = useState<TrackInterface>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const playerUpdater = useRef<any>(null)
 
   const initSync = () => {
     loadPlayer()
-    playerUpdater = setInterval(() => {
+    playerUpdater.current = setInterval(() => {
       loadPlayer()
         .catch(() => {
-          clearInterval(playerUpdater)
+          clearInterval(playerUpdater.current)
         })
     }, 4000);
   }
@@ -50,7 +49,7 @@ export function SpotifyPlayerProvider({ children }) {
     if (toggle) {
       return initSync()
     } else {
-      return clearInterval(playerUpdater)
+      return clearInterval(playerUpdater.current)
     }
   }
 
@@ -158,7 +157,9 @@ export function SpotifyPlayerProvider({ children }) {
   useEffect(() => {
     initSync()
     return () => {
-      clearInterval(playerUpdater)
+      if (playerUpdater.current) {
+        clearInterval(playerUpdater.current)
+      }
     }
   }, [])
 
