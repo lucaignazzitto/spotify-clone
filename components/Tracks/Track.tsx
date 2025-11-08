@@ -52,15 +52,11 @@ function Track({
   className = ""
 }: Props) {
   const { player, track: playingTrack } = useSpotifyPlayer() as any
-  const [isActive, setIsActive] = useState(false)
   const [large, medium, small] = track?.album?.images || []
   const image = medium || large || small
 
   const duration = track?.duration_ms ? millisToMinutesAndSeconds(track.duration_ms) : ''
-
-  useEffect(() => {
-    showActive && setIsActive(playingTrack?.uri === track?.uri)
-  }, [showActive, player, playingTrack, track])
+  const isActive = showActive && playingTrack?.uri === track?.uri
 
   return (
     Object.keys(track || {}).length ?

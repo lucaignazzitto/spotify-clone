@@ -10,20 +10,20 @@ export default async function Hero({ me }: { me: UserInterface }) {
   return (
     <div className={style.GernericAlbumHeroWrapper}>
       <div className={style.GernericAlbumHeroWrapperRowTitle}>
-        { image && image.url ? 
+        {image && image.url ?
           <div className={style.GernericAlbumHeroWrapperHeroBack}>
             <Image
-            src={image.url}
-            width={200}
-            height={200}
-            alt={`${me.display_name} profile image`}
-            className="position-relative img-fluid"
-            placeholder="blur"
-            blurDataURL={mediaPlaceholder}
-            loading="lazy"
-          />
-        </div> : null
-      }
+              src={image.url}
+              width={200}
+              height={200}
+              alt={`${me.display_name} profile image`}
+              className="position-relative img-fluid"
+              placeholder="blur"
+              blurDataURL={mediaPlaceholder}
+              loading="lazy"
+            />
+          </div> : null
+        }
         <div className={style.GernericAlbumHeroWrapperInfo}>
           <div className={style.GernericAlbumHeroWrapperInfoType}>{me.product}</div>
           <h1 className={style.GernericAlbumHeroWrapperInfoTitle}>{me?.display_name}</h1>
