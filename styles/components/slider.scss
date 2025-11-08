@@ -1,0 +1,17 @@
+@import "@/styles/variables.scss";
+
+.swiper {
+  --swiper-theme-color: #1ed760;
+  .swiper-pagination {
+    --swiper-pagination-bullet-size: 8px;
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-inactive-color: #fff;
+    --swiper-pagination-bottom: -30px;
+    --swiper-pagination-bullet-horizontal-gap: 8px;
+    text-align: start;
+    &.swiper-pagination-bullets-dynamic {
+      left: 5%;
+      transform: translate(-50%);
+    }
+  }
+}

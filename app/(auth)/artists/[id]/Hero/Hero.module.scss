@@ -1,0 +1,78 @@
+@import "@/styles/variables.scss";
+@import "@/styles/helpers.scss";
+@import "@/styles/breakpoints.scss";
+
+.ArtistHeroWrapper {
+  &HeroBack {
+    position: absolute;
+    top: -130px;
+    left: -100px;
+    width: calc(100% + 130px);
+    height: 100vh;
+    background-size: cover;
+    background-position: left center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.1;
+    
+    @include media-breakpoint-up (lg) {
+      left: -130px;
+      width: 55%;
+      height: 80vh;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 0px;
+      right: 0;
+      @include media-breakpoint-up (lg) {
+        box-shadow: 0 0 20px 20px map-get($colors, $key: "black");
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 0;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      box-shadow: 0 0 20px 20px map-get($colors, $key: "black");
+    }
+  }
+
+  &Title {
+    font-size: 80px;
+    margin: 0;
+    line-height: 0.9;
+    margin-top: 40px;
+    // @extend .truncate-2;
+
+    @include media-breakpoint-up (lg) {
+      max-width: 500px;
+      font-size: 90px;
+    }
+
+    @include media-breakpoint-down (sm) {
+      font-size: 70px;
+      overflow-wrap: break-word;
+    }
+
+    @include media-breakpoint-down (xs) {
+      font-size: 50px;
+      overflow-wrap: break-word;
+    }
+  }
+
+  &Followers {
+    margin: 0;
+    color: #c1c1c1;
+    font-weight: 500;
+  }
+
+  &Follow {
+    margin-top: 30px;
+  }
+}

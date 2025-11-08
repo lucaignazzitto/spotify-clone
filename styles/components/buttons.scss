@@ -1,0 +1,59 @@
+@import "../variables.scss";
+
+.btn {
+  position: relative;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 12px 18px;
+  display: inline-flex;
+  font-weight: 400;
+  
+  &-success {
+    display: inline-flex;
+    background-color: map-get($colors, $key: "green");
+    border: none;
+    font-weight: 500;
+    color: map-get($colors, $key: "black");
+  }
+
+  &-small {
+    padding: 8px 15px;
+  }
+
+  &-rounded {
+    border-radius: 20px;
+  }
+
+  &-none {
+    padding: 0;
+    margin: 0;
+    color: initial;
+    background-color: initial;
+    outline: none;
+    border: none;
+
+    &:focus,
+    &:active,
+    &:hover {
+      outline: none;
+      border: none;
+      background-color: initial;
+    }
+  }
+
+  &-close {
+    --bs-btn-close-color: map-get($colors, $key: "white");
+  }
+
+  &-play {
+    position: relative;
+
+    &-small {
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

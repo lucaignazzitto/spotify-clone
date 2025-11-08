@@ -1,0 +1,8 @@
+# convert this file to .env
+NEXT_PUBLIC_ACCOUNT_DOMAIN=https://accounts.spotify.com/
+NEXT_PUBLIC_API_DOMAIN=https://api.spotify.com/v1/
+NEXT_LOCAL_DOMAIN=http://localhost:3002/
+NEXT_CLIENT_ID= # developer.spotify.com > dashboard > app > settings > basic information
+NEXT_CLIENT_SECRET= # developer.spotify.com > dashboard > app > settings > basic information
+NEXT_MUSIXMATCH_API_KEY= # developer.musixmatch.com > admin > applications > [<generate app>]
+NEXT_PUBLIC_DEVELOPMENT=1

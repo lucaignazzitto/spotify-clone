@@ -1,0 +1,74 @@
+@import "@/styles/breakpoints.scss";
+
+.mainWrapp {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+
+  .mainRound {
+    position: absolute;
+    width: 200vw;
+    background: #202124;
+    border-radius: 50%;
+    z-index: -1;
+    aspect-ratio: 1 / 1;
+
+    @include media-breakpoint-up (sm) {
+      width: 140vw;
+    }
+
+    @include media-breakpoint-up (md) {
+      width: 120vw;
+    }
+
+    @include media-breakpoint-up (lg) {
+      width: 100vw;
+    }
+
+    @include media-breakpoint-up (xl) {
+      width: 90vw;
+    }
+  }
+
+  .smallRound {
+    position: absolute;
+    width: 140%;
+    background: #292d30;
+    border-radius: 50%;
+    z-index: -1;
+    aspect-ratio: 1 / 1;
+
+
+    @include media-breakpoint-up (md) {
+      width: 60%;
+    }
+  }
+
+  .title {
+    font-size: 20rem;
+    letter-spacing: 1rem;
+    line-height: 1;
+    color: #56565654;
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+
+    .middleZero {
+      position: relative;
+      border-radius: 50%;
+      width: 240px;
+      height: 240px;
+      overflow: hidden;
+    }
+  }
+
+  .desc {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+}

@@ -1,0 +1,28 @@
+@import "../variables.scss";
+
+.offcanvas {
+  background-color: map-get($colors, $key: "black");
+  --bs-offcanvas-width: 500px;
+  --bs-offcanvas-height: 100vh;
+  --bs-offcanvas-padding-x: 20px;
+  --bs-offcanvas-padding-y: 20px;
+
+  &-backdrop {
+    backdrop-filter: blur(12px);
+    background-color: #00000047;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  &-header {
+    color: map-get($colors, $key: "white");
+
+    .btn-close {
+      width: 25px;
+      height: 25px;
+      margin-left: auto;
+    }
+  }
+}

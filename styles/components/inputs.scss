@@ -1,0 +1,59 @@
+@import "../variables.scss";
+
+.form-control {
+  border-radius: 20px;
+  color: map-get($colors, $key: "black");
+  background-color: map-get($colors, $key: "muted");
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 12px 20px;
+  transition: all 300ms ease-in-out;
+
+  &:focus {
+    background-color: map-get($colors, $key: "white");
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 8px;
+  background: map-get($colors, $key: "white");
+  outline: none;
+  transition: all 100ms ease-in;
+
+  &:hover {
+    background: map-get($colors, $key: green-dark);
+    transition: all 200ms ease-in;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: map-get($colors, $key: "green");
+    // border: 1px solid map-get($colors, $key: "white");
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: map-get($colors, $key: "green");
+    // border: 1px solid map-get($colors, $key: "white");
+  }
+
+  &::-ms-fill-lower {
+    background-color: map-get($colors, $key: "white");
+  }
+
+  &::-ms-fill-upper {
+    background-color: map-get($colors, $key: "muted");
+  }
+}

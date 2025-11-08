@@ -1,0 +1,81 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.playerWrapp {
+  position: fixed;
+  height: 70px;
+  width: calc(100% - 160px);
+  z-index: 991;
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.822);
+  left: 120px;
+  padding: 0 15px;
+  bottom: -100px;
+  opacity: 0;
+  border-radius: 14px;
+  transition: all 600ms cubic-bezier(0.7, 0.44, 0.39, 0.99);
+
+  @include media-breakpoint-up(lg) {
+    height: 90px;
+    padding: 10px 30px;
+  }
+
+  @include media-breakpoint-down (lg) {
+    border-radius: 12px;
+    width: calc(100% - 20px);
+    left: 10px;
+  }
+
+  &HasListening {
+    height: 80px;
+    @include media-breakpoint-up(lg) {
+      height: 105px;
+      padding: 8px 30px;
+    }
+  }
+
+  &HasPlayer {
+    bottom: 20px;
+    opacity: 1;
+    @include media-breakpoint-down (lg) {
+      bottom: inherit;
+      top: 20px;
+    }
+  }
+
+  &Content {
+    height: 100%;
+
+    &Value {
+      &Item {
+        &Progress {
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+        @include media-breakpoint-up (lg) {
+          margin-left: 25px;
+          &:first-child {
+            margin-left: 0;
+          }
+
+          svg {
+            width: 22px;
+            height: 22px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.recapPlayerSlider {
+  height: auto !important;
+  top: 0 !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  right: 0px !important;
+  overflow: hidden;
+  background-color: rgba($color: map-get($colors, $key: "full-black"), $alpha: 0.4);
+}

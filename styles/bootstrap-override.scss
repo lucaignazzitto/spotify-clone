@@ -1,0 +1,70 @@
+// @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~bootstrap/scss/functions";
+@import "./variables.scss";
+
+// scss-docs-start import-stack
+@import "~bootstrap/scss/mixins/banner";
+@include bsBanner(Grid);
+
+// Configuration
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+$grays: map-merge(
+  $grays,
+  (
+    "500": #c1c1c1,
+    "700": #585858,
+  )
+);
+
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "primary": #1ed760,
+    "secondary": #0c8637,
+    "success": #1ed760,
+    "info": #0dcaf0,
+    "warning": #ffc107,
+    "danger": #dc3545,
+    "light": #f8f9fa,
+    "dark": #212529
+  )
+);
+
+$border-radius: 8px;
+$body-bg: #111;
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "./breakpoints.scss";
+
+// Layout & components
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/modal";
+@import "./components/popover.scss";
+@import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/placeholders";
+
+// Helpers
+@import "~bootstrap/scss/helpers";
+
+// Utilities
+@import "~bootstrap/scss/utilities/api";
+// scss-docs-end import-stack
+
+// @import "~bootstrap/scss/bootstrap.scss";

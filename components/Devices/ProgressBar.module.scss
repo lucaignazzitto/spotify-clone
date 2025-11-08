@@ -1,0 +1,25 @@
+@import "@/styles/variables.scss";
+
+.progressWrapp {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 10px auto 0;
+  
+  &Content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &Indicator {
+      width: 30px;
+      font-size: 12px;
+    }
+    
+    &Input {
+      margin: 0 8px;
+      height: 3px !important;
+      cursor: pointer;
+    }
+  }
+}

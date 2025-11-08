@@ -1,0 +1,77 @@
+// @import "~bootstrap/scss/popover";
+@import "../variables.scss";
+
+.popover {
+  min-width: 200px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.822);
+  border: 1px solid rgb(255 255 255 / 10%);
+  z-index: 991;
+
+  &-arrow {
+    display: none;
+  }
+
+  &-header {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+  }
+  
+  &-body {
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      max-height: 200px;
+      overflow: auto;
+
+      li,
+      .as-li {
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+        margin-top: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(map-get($colors, $key: "white"), 0.2);
+        }
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &.divider {
+          border-top: 1px solid rgba(map-get($colors, $key: "white"), 0.2);
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+        }
+
+        .no-style {
+          padding: 0;
+          margin: 0;
+          min-height: inherit;
+          border-radius: inherit;
+          background: none;
+
+          &:hover {
+            background: none;
+          }
+        }
+      }
+      .as-li {
+        padding: 0;
+        &:hover {
+          background: none;
+        }
+      }
+    }
+  }
+}

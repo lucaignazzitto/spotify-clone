@@ -1,0 +1,25 @@
+@import "react-toastify/dist/ReactToastify.css";
+
+:root {
+  --toastify-color-success: #1ed760;
+  --toastify-toast-min-height: 50px;
+  --toastify-font-family: inherit;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+
+  &-container {
+    font-size: 14px;
+  }
+
+  &--success {
+    background-color: map-get($colors, $key: green-dark);
+    color: map-get($colors, $key: "white");
+    .Toastify__close-button {
+      color: map-get($colors, $key: "white");
+      opacity: 1;
+    }
+  }
+
+}

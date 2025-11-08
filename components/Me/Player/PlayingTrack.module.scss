@@ -1,0 +1,92 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.PlayingTrack {
+  &Wrapp {
+    position: relative;
+    max-width: 300px;
+  
+    &MobileDrawer {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      
+      @include media-breakpoint-up (lg) {
+        display: none;
+      }
+    }
+  
+    &Inner {
+      display: grid;
+      grid-template-areas: "image firstline end"
+      "image secondline end";
+      grid-template-columns: auto 1fr auto;
+      column-gap: 10px;
+      justify-content: start;
+      
+      @include media-breakpoint-up (lg) {
+        column-gap: 15px;
+      }
+  
+      &Placeholder {
+        width: 55px;
+        grid-area: image;
+        align-self: center;
+      }
+  
+      &Media {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+  
+      &Title {
+        font-size: 13px;
+        font-weight: 500;
+        color: map-get($colors, $key: "white");
+        grid-area: firstline;
+        line-height: 1.5;
+        align-self: end;
+      }
+  
+      &Artist {
+        grid-area: secondline;
+        white-space: nowrap;
+        overflow: auto;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 4px;
+        color: map-get($colors, $key: "muted");
+  
+        & a {
+          font-size: 10px;
+          color: map-get($colors, $key: "muted");
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+  
+      &Like {
+        position: relative;
+        grid-area: end;
+        max-width: 20px;
+        width: 100%;
+        text-align: right;
+        align-self: center;
+        z-index: 4;
+      }
+    }
+  }
+
+  &NoTrack {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "nodeVersionHint": 23,
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "nvm use 23 && yarn dev -p 3002"
+    }
+  ]
+}

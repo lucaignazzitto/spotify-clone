@@ -1,0 +1,89 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.deviceWrapp {
+  padding: 10px;
+  border-radius: 8px;
+  color: map-get($colors, $key: "muted");
+  margin-bottom: 20px;
+  font-size: 14px;
+  min-height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  @include media-breakpoint-up (lg) {
+    padding: 10px 20px;
+  }
+
+  &:hover {
+    background-color: #ffffff1a;
+  }
+
+  &IsActive {
+    background-color: #ffffff1a;
+    .deviceWrappInner {
+      &Content {
+        &Title {
+          color: map-get($colors, $key: "green");
+        }
+      }
+    }
+  }
+
+  &Inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    &Content {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+      border-radius: 8px;
+
+      &Title {
+        font-weight: 500;
+        color: map-get($colors, $key: "white");
+        
+        @include media-breakpoint-down (md) {
+          font-size: 14px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+      &Icon {
+        max-width: 40px;
+        margin-right: 15px;
+        text-align: right;
+        
+        @include media-breakpoint-up (lg) {
+          margin-right: 20px;
+        }
+      }
+  
+      &Volume {
+        max-width: 100px;
+        width: 100%;
+        margin-left: auto;
+        position: relative;
+        z-index: 3;
+
+        @include media-breakpoint-down (md) {
+          max-width: 80px;
+        }
+
+        @include media-breakpoint-down (sm) {
+          max-width: 70px;
+        }
+      }
+    }
+  }
+}

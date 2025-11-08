@@ -1,0 +1,225 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.trackWrapp {
+  padding: 10px 20px;
+  border-radius: 8px;
+  // -webkit-backdrop-filter: blur(8px);
+  // backdrop-filter: blur(8px);
+  color: map-get($colors, $key: "muted");
+  margin-bottom: 20px;
+  font-size: 14px;
+  min-height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  // overflow: hidden;
+  position: relative;
+
+  &HoverAnim {
+    &:hover {
+      background-color: #ffffff1a;
+
+      &:not(.trackWrappHasImage) {
+
+        .trackWrappPosition {
+          opacity: 0;
+          transition-delay: 100ms;
+        }
+
+        .trackWrappPlayer {
+          opacity: 1;
+          visibility: visible;
+          transform: scale(1);
+          transition: all 200ms ease-in-out;
+        }
+      }
+    }
+  }
+
+  &ShowLike {
+    .trackWrappInnerContent {
+      &Like {
+        display: block;
+      }
+    }
+  }
+
+  &HasImage {
+    padding: 0px;
+
+    .trackWrappInner {
+      &Placeholder {
+        position: relative;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 80px;
+
+        @include media-breakpoint-up (lg) {
+          flex-basis: 90px;
+        }
+
+        @include media-breakpoint-down (sm) {
+          flex-basis: 75px;
+        }
+      }
+
+      &Content {
+        margin-left: -40px;
+        background-color: #11111170;
+        backdrop-filter: blur(40px);
+        padding: 10px;
+        box-shadow: 0 0 10px map-get($colors, $key: "black");
+        left: 0;
+        transition: left 200ms ease-in-out;
+
+        &Album {
+          position: relative;
+
+          &Title {
+            position: relative;
+          }
+        }
+      }
+    }
+
+    .trackWrappPlayer {
+      z-index: 9;
+      width: 60px;
+      left: -15px;
+      padding-left: 10px;
+      visibility: visible;
+
+      &:hover {
+        transform: scale(1);
+        transition: all 200ms ease-in-out;
+        opacity: 1;
+
+        &+.trackWrappPosition {
+          opacity: 0;
+        }
+
+        &+.trackWrappInner {
+          transform: translateX(30px);
+          transition: transform 200ms ease-in-out;
+
+          & .trackWrappInnerContent {
+            left: 45px;
+            transition: left 200ms ease-in-out;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      background-color: initial;
+    }
+  }
+
+  &IsActive {
+    .trackWrappInner {
+      &Content {
+        &Album {
+          &Title {
+            color: map-get($colors, $key: "green");
+          }
+        }
+      }
+    }
+  }
+
+  &Player {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 15px;
+    transform: scale(0.9);
+    transition: all 200ms ease-in-out;
+  }
+
+  &Position {
+    font-size: 14px;
+    margin-right: 20px;
+    opacity: 1;
+    transition-delay: 100ms;
+  }
+
+  &Inner {
+    position: relative;
+    transform: translateX(0);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    transition: transform 200ms ease-in-out;
+
+    &Placeholder {
+      width: 100px;
+    }
+
+    &Media {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    &Content {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+      border-radius: 8px;
+
+      &Album {
+        width: 100%;
+        margin-right: 20px;
+
+        &Title {
+          font-weight: 500;
+          color: map-get($colors, $key: "white");
+        }
+
+        &Artist {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          & a {
+            font-size: 12px;
+            color: map-get($colors, $key: "muted");
+          }
+        }
+      }
+
+      &Like {
+        display: none;
+        max-width: 40px;
+        width: 100%;
+        margin-right: 20px;
+        text-align: right;
+      }
+
+      &Duration,
+      &Queue {
+        max-width: 40px;
+        width: 100%;
+        justify-self: flex-end;
+        text-align: right;
+      }
+
+      // &Queue {
+      //   @include media-breakpoint-up (lg) {
+      //     opacity: 0;
+      //     visibility: hidden;
+      //   }  
+      // }
+    }
+  }
+}

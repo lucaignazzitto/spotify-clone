@@ -1,0 +1,60 @@
+@import "../variables.scss";
+
+.player-wrapp {
+  &-content {
+    .track {
+      margin-bottom: 0;
+      
+      &-position {
+        display: none;
+      }
+
+      .track-inner {
+        &-placeholder {
+          flex-basis: 60px;
+        }
+
+        &-content {
+          margin-left: 10px;
+          background: #111111a6;
+          box-shadow: none;
+          padding: 10px 20px;
+
+
+          &-like {
+            margin: 0;
+          }
+
+          &-album {
+            &-title {
+              color: map-get($colors, $key: "white");
+            }
+          }
+
+          &-duration {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.player-recap-slider {
+  &.offcanvas {
+    --bs-offcanvas-padding-x: 0px;
+    --bs-offcanvas-padding-y: 0px;
+
+    .offcanvas-header {
+      position: relative;
+      width: 100%;
+      // justify-content: flex-end;
+      padding: 15px;
+      z-index: 2;
+
+      button {
+        margin-left: auto;
+      }
+    }
+  }
+}

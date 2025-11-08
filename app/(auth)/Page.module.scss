@@ -1,0 +1,9 @@
+@import "@/styles/variables.scss";
+
+.Homepage {
+  &Title {
+    color: map-get($colors, $key: "white");
+    font-weight: 500;
+    margin: 0;
+  }
+}

@@ -1,0 +1,22 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.ListeningOn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  // bottom: 7px;
+  font-size: 12px;
+  // width: 100%;
+  left: 0;
+  // background-color: map-get($colors, $key: "green");
+  color: map-get($colors, $key: "white");
+  // padding: 1px 30px;
+  text-align: end;
+  // letter-spacing: 0.4px;
+
+  &Icon {
+    margin-right: 10px;
+    fill: map-get($colors, $key: "green") !important;
+  }
+}

@@ -1,0 +1,53 @@
+@import "@/styles/variables.scss";
+
+.LoginPage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &Bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &Form {
+    padding: 50px 40px;
+    box-shadow: 0 0 10px map-get($colors, $key: "full-black");
+    max-width: 500px;
+    border-radius: 12px;
+    background-color: map-get($colors, $key: "black");
+
+    &Logo {
+      margin-bottom: 30px;
+    }
+    
+    &Title {
+      font-size: 50px;
+      font-weight: 500;
+      line-height: 1;
+      color: map-get($colors, $key: "white");
+    }
+
+    &Description {
+      margin-top: 30px;
+      color:  map-get($colors, $key: "muted");
+    }
+
+    &Cta {
+      margin-top: 100px;
+      width: 100%;
+      padding: 8px;
+    }
+  }
+}

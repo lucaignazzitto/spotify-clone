@@ -1,0 +1,39 @@
+@import "@/styles/variables.scss";
+
+.HeroWrapper {
+  display: flex;
+  align-items: center;
+
+  &HeroBack {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      position: relative !important;
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &Info {
+    margin-left: 40px;
+    font-size: 12px;
+    
+    &Title {
+      font-size: 80px;
+      margin: 0;
+      line-height: 0.9;
+    }
+
+    &Type {
+      text-transform: capitalize;
+    }
+  
+    &Followers {
+      margin-top: 6px;
+      font-weight: 500;
+    }
+  }
+}

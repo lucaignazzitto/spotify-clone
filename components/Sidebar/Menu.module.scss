@@ -1,0 +1,68 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.SidebarMenu {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  
+  @include media-breakpoint-up (lg) {
+    flex-direction: column;
+  }
+
+  &Logo {
+    margin-top: 0;
+  }
+
+  &Ul {
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    margin: auto;
+    
+    @include media-breakpoint-up (lg) {
+      flex-direction: column;
+      width: inherit;
+      display: flex;
+      align-items: center;
+    }
+
+    @include media-breakpoint-down (lg) {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(auto, 30px));
+      column-gap: 50px;
+    }
+
+    @include media-breakpoint-down (md) {
+      column-gap: 30px;
+    }
+
+    @include media-breakpoint-down (sm) {
+      column-gap: 20px;
+    }
+
+    &List {
+      display: inline-block;
+      cursor: pointer;
+      
+      @include media-breakpoint-up (lg) {
+        margin-bottom: 60px;
+      }
+
+      @include media-breakpoint-down (lg) {
+        justify-self: center;
+        align-self: center;
+      }
+
+      &Active {
+        color: map-get($colors, $key: "green");
+        & svg {
+          fill: map-get($colors, $key: "green");
+        }
+      }
+    }
+  }
+}

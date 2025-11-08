@@ -1,0 +1,15 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.AppIcon {
+  display: inline-block;
+  fill: map-get($colors, $key: "white");
+  width: 25px;
+  height: 25px;
+  font-weight: 500;
+
+  @include media-breakpoint-down (md) {
+    width: 20px;
+    height: 20px;
+  }
+}
