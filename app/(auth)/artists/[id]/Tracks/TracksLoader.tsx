@@ -10,7 +10,7 @@ export default function ArtistHeroLoader ({ className = "", title = "Popular son
   return (
     <div className={className}>
       <span className={`section-title`}>{title}</span>
-      <div className='mt-4 mt-lg-5'>
+      <div className='mt-3 mt-lg-4'>
         <TracksLoader direction='vertical' times={5} />
       </div>
     </div>

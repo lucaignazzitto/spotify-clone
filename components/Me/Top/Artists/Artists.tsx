@@ -31,7 +31,7 @@ export default async function MyTopArtist ({ className = "" }) {
   return (
     <div className={`${style.TopArtistsList} ${className}`}>
       <span className={`section-title`}>My top artists</span>
-      <div className={`mt-4 mt-lg-5`}>
+      <div className={`mt-3 mt-lg-4`}>
         <GenericSlider>
         {
           artists.map((artist, index) => (

@@ -1,32 +1,19 @@
 'use client'
 import PlayerStore from '@/stores/PlayerStore';
-import { Children, useCallback, useEffect, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import Spinner from "@/components/Loader/Spinner"
-import Placeholder from '@/components/Loader/Placeholder';
 import ImageFit from "@/components/Image/Fit"
 import { EffectCards } from 'swiper/modules';
-
 import style from './SliderNavigation.module.scss'
-
 // Import Swiper styles
 import 'swiper/css';
 import { observer } from 'mobx-react-lite';
 import 'swiper/css/effect-cards';
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
-import Image from 'next/image';
 
-const SliderNavigation = ({
-  spaceBetween = 30,
-  slidesPerView = 4,
-  className = "",
-  overflowed = true,
-  onInit = () => {},
-  onSlideChange = () => {},
-  children,
-  ...props
-}) => {
-  const { player, deviceId } = useSpotifyPlayer()
+const SliderNavigation = () => {
+  const { player, track, deviceId } = useSpotifyPlayer()
   const [isLoading, setIsLoading] = useState(false)
   const [internallyHandled, setInternallyHandled] = useState(false)
   const [swiperInstance, setSwiperInstance] = useState(null)
@@ -37,18 +24,15 @@ const SliderNavigation = ({
     }
   }))
 
-  const track = player?.item
-
   const initSlider = (swiper) => {
     setSwiperInstance(swiper)
     // swiper.slideTo(1, 0, false)
   }
 
-  const editSlideByKey = useCallback((key = swiperInstance.activeIndex) => {
+  const editSlideByKey = useCallback((key = swiperInstance?.activeIndex || 0) => {
     let tmpSlides = [...slides]
     let currentSlide = tmpSlides[key]
     const isEnd = key + 2 === tmpSlides.length
-    const track = player?.item || {}
     const [large, medium, small ] = track?.album?.images || []
     const image = large || medium || small
 
@@ -64,7 +48,7 @@ const SliderNavigation = ({
     }
 
     if (currentSlide) {
-      currentSlide.content = <ImageFit url={image?.url} className={style.SliderNavigationContainerSliderImage} />
+      currentSlide.content = <ImageFit url={image?.url} alt={track.name} className={style.SliderNavigationContainerSliderImage} />
     }
     setInternallyHandled(false)
     setSlides(tmpSlides);
@@ -87,7 +71,7 @@ const SliderNavigation = ({
       })
   }
 
-  const handlePrev = () => {
+  const handlePrev = (swiper) => {
     setIsLoading(true)
     setInternallyHandled(true)
     return PlayerStore.previous(deviceId)
@@ -106,7 +90,7 @@ const SliderNavigation = ({
 
   useEffect(() => {
     editSlideByKey(0)
-  }, [editSlideByKey, swiperInstance])
+  }, [swiperInstance])
 
   useEffect(() => {
     if (swiperInstance) {

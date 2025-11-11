@@ -5,14 +5,20 @@ import PlayerStore from "@/stores/PlayerStore"
 import Spinner from "@/components/Loader/Spinner"
 import Icon from '@/components/Image/Icon'
 import Button from "@/components/Buttons/Button"
+import { ButtonProps } from "react-bootstrap"
+import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
+
+interface Props extends ButtonProps {
+  className?: string,
+}
 
 /**
  * set repeat mode
  */
-function RepeatButton ({ className = "" }) {
-  const [ loading, setLoading ] = useState(false) 
-  const player = PlayerStore.getPlayer
-  const deviceId = PlayerStore.getPlayerId
+function RepeatButton({ className = "", ...props }: Props) {
+  const { deviceId, player, repeat, loadPlayer } = useSpotifyPlayer()
+
+  const [loading, setLoading] = useState(false)
 
   const statusLegend = {
     'off': {
@@ -31,10 +37,10 @@ function RepeatButton ({ className = "" }) {
 
   const repeatState = player?.repeat_state || 'off'
 
-  const handleClick = (e) => {
-    e.preventDefault()
+  const handleClick = () => {
     setLoading(true)
-    return PlayerStore.repeat(deviceId, statusLegend[repeatState].nextState)
+    return repeat(deviceId, statusLegend[repeatState].nextState)
+      .then(async () => await loadPlayer())
       .finally(() => {
         setLoading(false)
       })
@@ -44,12 +50,14 @@ function RepeatButton ({ className = "" }) {
     <Button
       className={`hover-anim ${className}`}
       disabled={!deviceId}
+      role="button"
       aria-label="Repeat song"
       text={
-        loading ? <Spinner show={true}  />
-        : <Icon id={statusLegend[repeatState].icon} />
+        loading ? <Spinner show={true} />
+          : <Icon id={statusLegend[repeatState].icon} />
       }
       onClick={handleClick}
+      {...props}
     />
   )
 }

@@ -4,7 +4,6 @@ export interface Image {
   width: number
 }
 
-
 export interface External_Ids {
   isrc: string,
   ean: string,

@@ -36,8 +36,8 @@ export interface PlayerInterface {
     external_urls: External_Urls,
     uri: string
   },
-  timestamp: 0,
-  progress_ms: 0,
+  timestamp: number,
+  progress_ms: number,
   is_playing: boolean,
   item: TrackInterface | EpisodeInterface,
   currently_playing_type: string,

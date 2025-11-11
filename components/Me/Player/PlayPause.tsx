@@ -1,12 +1,11 @@
 'use client'
-import { observer } from "mobx-react-lite"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import Button from "@/components/Buttons/Button"
 import Icon from '@/components/Image/Icon'
-import Spinner from "@/components/Loader/Spinner"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
+import { ButtonProps } from "react-bootstrap"
 
-interface PlayPauseProps {
+interface PlayPauseProps extends Omit<ButtonProps, 'size'> {
   deviceId?: number | string,
   parentUri?: string,
   element: any, //@todo apply correct type
@@ -16,19 +15,6 @@ interface PlayPauseProps {
   disabled?: boolean
 }
 
-/**
- * Start a new context or resume current playback on the user's active device.
- * @param {string} [deviceId=""] The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
- * @param {string} [contextUri=""] Optional. Spotify URI of the context to play. Valid contexts are albums, artists & playlists.
- * @param {string} [uris=""] Optional. A JSON array of the Spotify track URIs to play
- * @param {Object} [offset={}] Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object "position" is zero based and can’t be negative. Example: "offset": {"position": 5} "uri" is a string representing the uri of the item to start at.
- * @param {String} [type="track"] Determinate what type of audio to reproduce ["track", "album", "playlist"]
- * @param {number} [position_ms=0] 
- * @param {Boolean} [animate=true] show animation on hover 
- * @param {string} [className=""] 
- * @param {() => void} [onClick=() => {}] 
- * @returns {JSX}
- */
 function PlayPause({
   element,
   parentUri,
@@ -39,8 +25,7 @@ function PlayPause({
   ...props
 }: PlayPauseProps) {
 
-  const { player, deviceId, isPlaying: spotifyIsPlaying, play: spotifyPlay, pause: spotifyPause } = useSpotifyPlayer() as any
-  const [loading, setLoading] = useState(false)
+  const { player, deviceId, isPlaying: spotifyIsPlaying, play: spotifyPlay, pause: spotifyPause, setOpenDevicePicker } = useSpotifyPlayer() as any
 
   const isActive = useMemo(() => {
     const currentUris = [element?.context?.uri, element?.uri, element?.item?.uri].filter(uri => uri)
@@ -95,8 +80,12 @@ function PlayPause({
   }
 
   const play = () => {
-    const params = preparePayloadByElement()
-    return spotifyPlay(deviceId, params)
+    if (deviceId) {
+      const params = preparePayloadByElement()
+      return spotifyPlay(deviceId, params)
+    } else {
+      setOpenDevicePicker(true)
+    }
   }
 
   const pause = () => {
@@ -112,14 +101,11 @@ function PlayPause({
     <Button
       className={`btn-none btn-play ${animate ? 'hover-anim' : ''} ${className} btn-play-${size} ${isPlaying ? 'is-playing' : ''}`}
       disabled={disabled}
-      text={
-        loading ? <Spinner show={loading}  />
-        : <Icon id={ isPlaying ? 'track-play' : 'track-pause'}></Icon>
-      }
+      text={<Icon id={ isPlaying ? 'track-play' : 'track-pause'}></Icon>}
       onClick={handleClick}
       {...props}
     />
   )
 }
 
-export default observer(PlayPause)
+export default PlayPause

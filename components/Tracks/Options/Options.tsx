@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { mediaPlaceholder } from '@/utils/helpers';
 import { TrackInterface } from '@/lib/models/track.interface';
 import { PlaylistInterface } from '@/lib/models/playlist.interface';
+import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 
 interface Props {
   track: TrackInterface,
@@ -24,6 +25,7 @@ interface Props {
 }
 
 function TrackOptions({ track, from = "album", playlistId }: Props) {
+  const { deviceId, addToQueue: SpotifyAddToQueue, } = useSpotifyPlayer()
   const router = useRouter();
   const [showModalPlaylists, setShowModalPlaylists] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
@@ -31,7 +33,7 @@ function TrackOptions({ track, from = "album", playlistId }: Props) {
   const [playlists, setPlaylists] = useState<PlaylistInterface[]>([])
 
   const addToQueue = () => {
-    return PlayerStore.addToQueue(PlayerStore?.getPlayerId, track?.uri)
+    return SpotifyAddToQueue(deviceId, track?.uri)
       .then(() => {
         toast.success(`${track.name} added to queue`)
       })

@@ -2,8 +2,8 @@ import FollowButton from "@/components/Buttons/Follow"
 import { ArtistInterface } from "@/lib/models/artist.inteface"
 import style from "@/app/(auth)/artists/[id]/Hero/Hero.module.scss"
 
-export default async function Hero({ artist }: { artist: ArtistInterface }) {
-  const heroImage = artist?.images?.[0] || null
+export default async function Hero({ artist, useImage = true }: { artist: ArtistInterface, useImage?: boolean }) {
+  const heroImage = useImage ? artist?.images?.[0] || null : null
 
   const formatNumber = (number: number | undefined) => {
     if (number !== undefined) {

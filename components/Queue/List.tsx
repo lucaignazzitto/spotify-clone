@@ -1,15 +1,11 @@
 "use client"
-import Tracks from '@/components/Tracks/Tracks'
 import Track from '@/components/Tracks/Track'
 import { TrackInterface } from '@/lib/models/track.interface'
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext'
 import { useEffect } from 'react'
 import { revalidateByPath } from '@/app/actions/revalidate'
 
-export default function QueueList ({
-  currently_playing,
-  queue = []
-}: { currently_playing?: TrackInterface, queue: TrackInterface[] }) { 
+export default function QueueList({ currently_playing, queue = [] }: { currently_playing?: TrackInterface, queue: TrackInterface[] }) {
   const { track, changingTrack } = useSpotifyPlayer()
 
   const revalidate = async () => {
@@ -31,15 +27,20 @@ export default function QueueList ({
       </section>
       <section className={`page-section`}>
         <span className={`font-medium text-gray-300`}>Next on queue</span>
-        <Tracks
-          className={`mt-4`}
-          tracks={queue}
-          showImage
-          showActive={false}
-          showNumber
-          showOptions
-          useLoopAsNumber
-        />
+        {
+          queue.map((track, index) => (
+            <Track
+              track={track}
+              parentUri={track.album.uri}
+              showImage={true}
+              className={`mt-4`}
+              key={index}
+              numberLabel={index + 1}
+              showActive={false}
+              showNumber
+            />
+          ))
+        }
       </section>
     </div>
   )

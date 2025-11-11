@@ -2,22 +2,28 @@
 import { observer } from "mobx-react-lite"
 import Spinner from "@/components/Loader/Spinner"
 import Link from "next/link"
-import ImageFit from "@/components/Image/Fit"
 import LinkToArtist from '@/components/Artists/LinkToArtist'
 import LikeButton from '@/components/Buttons/Like'
 import style from "./PlayingTrack.module.scss"
 import LinkToAlbum from "@/components/Artists/LinkToAlbum"
 import Image from "next/image"
 import { mediaPlaceholder } from "@/utils/helpers"
+import { TrackInterface } from "@/lib/models/track.interface"
 
-function PlayingTrack ({ track = {}, showLike = true, isLoading = false, className = "", handleClick = () => {} }) {
+interface Props {
+  track?: TrackInterface
+  showLike?: boolean
+  isLoading?: boolean
+  className?: string
+  handleClick?: () => void
+}
 
-  track = (track && 'track' in track) ? track.track : track || {}
+function PlayingTrack ({ track, showLike = true, isLoading = false, className = "", handleClick = () => {} }: Props) {
   const [ large, medium, small ] = track?.album?.images || []
   const image = medium || large || small
 
   return (
-    Object.keys(track).length ?
+    Object.keys(track || {}).length ?
       <div className={`${style.PlayingTrackWrapp} ${showLike ? style.PlayingTrackWrappShowLike : '' } ${className}`}>
         <button className={`btn btn-none ${style.PlayingTrackWrappMobileDrawer}`} onClick={handleClick}></button>
         <div className={`${style.PlayingTrackWrappInner}`}>

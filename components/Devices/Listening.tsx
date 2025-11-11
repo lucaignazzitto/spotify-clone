@@ -3,7 +3,7 @@ import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 import Icon from '@/components/Image/Icon'
 import style from "./Listening.module.scss"
 
-function Listening ({ className = "" }) {
+function Listening ({ className = "" }: { className?: string }) {
   const { activeDevice: device } = useSpotifyPlayer()
 
   return (

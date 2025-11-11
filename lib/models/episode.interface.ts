@@ -5,7 +5,7 @@ export interface EpisodeInterface {
   audio_preview_url: string;
   description: string;
   html_description: string;
-  duration_ms: string;
+  duration_ms: number;
   explicit: string;
   external_urls: External_Urls,
   href: string;

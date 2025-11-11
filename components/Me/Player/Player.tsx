@@ -12,7 +12,6 @@ import RepeatButton from '@/components/Me/Player/Repeat';
 import DevicesButton from "@/components/Me/Player/DevicesButton"
 import Listening from '@/components/Devices/Listening';
 import ProgressBar from '@/components/Devices/ProgressBar';
-import LyricsButton from './LyricsButton';
 import Volume from "@/components/Devices/Volume"
 import PlayerRecap from './PlayerRecap';
 import QueueButton from "./QueueButton";
@@ -22,7 +21,7 @@ import style from "./Player.module.scss"
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 
 function Player() {
-  const { player = {}, track = {}, activeDevice, isPlaying } = useSpotifyPlayer();
+  const { player, track, activeDevice, isPlaying } = useSpotifyPlayer();
   const [showRecap, setShowRecap] = useState(false)
   const device = activeDevice
   const pathname = usePathname()
@@ -53,20 +52,17 @@ function Player() {
                 <PlayPause disabled={!activeDevice?.id} element={player} />
               </div>
               <div className={`${style.playerWrappContentValueItem} d-none d-lg-block`}>
-                <NextButton className="btn btn-none" />
+                <NextButton className="btn btn-none" disabled={!activeDevice?.id} />
               </div>
               <div className={`${style.playerWrappContentValueItem} d-none d-lg-block`}>
                 <RepeatButton className="btn btn-none" />
               </div>
             </div>
             <div className={`${style.playerWrappContentValueItemProgress} d-none d-lg-block mt-3`}>
-              <ProgressBar key={player.progress_ms} isPlaying={isPlaying} startAt={player.progress_ms} max={player?.item?.duration_ms} />
+              <ProgressBar key={player?.progress_ms} startAt={player?.progress_ms || 0} max={player?.item?.duration_ms} />
             </div>
           </Col>
           <Col md={3} className='align-items-center justify-content-end d-none d-lg-flex'>
-            {/* <div className={` ${style.playerWrappContentValueItem}`}>
-              <LyricsButton track={player?.item || {}} color={pathname === '/player/lyrics' ? '#1ed760' : ''} />
-            </div> */}
             <div className={` ${style.playerWrappContentValueItem}`}>
               <DevicesButton color={pathname === '/player/devices' ? '#1ed760' : ''} />
             </div>

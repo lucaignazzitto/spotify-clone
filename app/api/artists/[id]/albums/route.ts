@@ -11,9 +11,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const { searchParams } = new URL(request.url)
   const { id: artistId} = await params
   const market = searchParams.get('market')
-  const limit = searchParams.get('limit') || 5
+  const limit = searchParams.get('limit') || 10
+  const include_groups = searchParams.get('include_groups') || 'album'
+
   const url = process.env.NEXT_PUBLIC_API_DOMAIN
-  const res = await fetch(`${url}artists/${artistId}/albums?market=${market}&limit=${limit}`, {
+  const res = await fetch(`${url}artists/${artistId}/albums?market=${market}&limit=${limit}&include_groups=${include_groups}`, {
     headers: {
       'Authorization': `Bearer ${bearer}`
     }

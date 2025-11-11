@@ -5,14 +5,14 @@ import Device from "@/components/Devices/Device"
 import Icon from '@/components/Image/Icon'
 import Spinner from "@/components/Loader/Spinner"
 import Link from "next/link"
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 
-function DevicesButton ({ className = "", color = "" }) {
+function DevicesButton ({ className = "", color = "" }: { className?: string, color?: string }) {
   const { activeDevice, devices, loadDevices } = useSpotifyPlayer()
-  const [ loading, setLoading ] = useState(false)
+  const [ loading, setLoading ] = useState<boolean>(false)
   
-  const onDevicesToggle = (status) => {
+  const onDevicesToggle = (status: boolean) => {
     if (status) {
       getDevices()
     }
@@ -34,7 +34,7 @@ function DevicesButton ({ className = "", color = "" }) {
         onToggle={onDevicesToggle}
         placement="top"
         overlay={
-        <Popover>
+        <Popover style={{ maxWidth: 300 }}>
           <Popover.Header className='p-3'>
             <div className='d-flex align-items-center'>
               <Spinner width={20} height={20} show={loading} className='me-2' />

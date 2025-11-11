@@ -31,6 +31,10 @@ h2 {
   font-size: 12px;
 }
 
+.fs-14 {
+  font-size: 14px;
+}
+
 .mt-40 {
   margin-top: 40px;
 }
@@ -41,6 +45,10 @@ h2 {
 
 .bg-grey {
   background-color: map-get($colors, $key: "grey");
+}
+
+.cl-white {
+  color: map-get($colors, $key: "white");
 }
 
 .cl-grey {

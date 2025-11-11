@@ -5,11 +5,17 @@ import debounce from 'lodash/debounce'
 import style from "./ProgressBar.module.scss"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
 
-function ProgressBar({ startAt = 0, max = 0, className = "" }) {
-  const { player = {}, deviceId, seek, handleSync } = useSpotifyPlayer()
+export interface ProgressBarProps {
+  startAt?: number,
+  max?: number,
+  className?: string
+}
+
+function ProgressBar({ startAt = 0, max = 0, className = "" }: ProgressBarProps) {
+  const { player, deviceId, seek, handleSync } = useSpotifyPlayer()
   const intervalRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [currentProgress, setCurrentProgress] = useState(startAt)
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [currentProgress, setCurrentProgress] = useState<number>(startAt)
 
   const handleProgress = (e) => {
     e.preventDefault()
@@ -21,10 +27,11 @@ function ProgressBar({ startAt = 0, max = 0, className = "" }) {
 
   const debouncedSeek = useMemo(() => debounce((newProgress) => {
     handleSync(false)
-    seek(deviceId, newProgress).finally(() => {
-      handleSync(true)
-      setIsDragging(false)
-    })
+    seek(deviceId, newProgress)
+      .finally(() => {
+        handleSync(true)
+        setIsDragging(false)
+      })
   }, 100), [deviceId, seek, handleSync])
 
   const setProgress = useCallback((newProgress) => {

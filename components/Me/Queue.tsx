@@ -25,6 +25,7 @@ export default function Queue ({ className = "" }: { className?: string }) {
   }
 
   useEffect(() => {
+    console.log('sadsad')
     loadQueue()
   }, [])
 
@@ -35,7 +36,7 @@ export default function Queue ({ className = "" }: { className?: string }) {
         <div className={`mt-4`}>
           {
             loading ? <TracksLoader times={1} />
-            : <Track track={currentPlaying} showImage={true} />
+            : <Track track={currentPlaying} parentUri={currentPlaying.album.uri} showImage={true} />
           }
         </div>
       </div>
