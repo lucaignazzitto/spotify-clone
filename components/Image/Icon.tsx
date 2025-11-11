@@ -1,6 +1,6 @@
 import style from './Icon.module.scss'
 
-interface Props {
+export interface IconProps {
   className?: string
   id?: string
   color?: string
@@ -9,7 +9,7 @@ interface Props {
   styles?: any
 }
 
-export default function Icon({ className = "", id = "", color = "", width, height, styles = {} }: Props) {
+export default function Icon({ className = "", id = "", color = "", width, height, styles = {} }: IconProps) {
   return (
     <svg className={`${style.AppIcon} ${className}`} style={{
       fill: color,

@@ -32,7 +32,7 @@ export default async function CategoriesPage ({ params }: { params: Promise<{ id
     <div className={style.CategoryPage}>
       <BackgroundHandler src={pageBg} />
       <GenericAlbumHero album={category} showExtras={false} showShuffle={false} showPlay={false} showLike={false} />
-      <div className='mt-4 mt-lg-5'>
+      <div className='mt-3 mt-lg-4'>
         <p>No list, deprecated by spotify</p>
       </div>
     </div>

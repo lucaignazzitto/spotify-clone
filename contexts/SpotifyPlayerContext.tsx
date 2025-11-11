@@ -1,9 +1,10 @@
 "use client"
+import Devices from "@/components/Devices/Devices";
 import { DeviceInterface } from "@/lib/models/devices.interface";
 import { PlayerInterface, PlayRequestParams } from "@/lib/models/player.interface";
 import { TrackInterface } from "@/lib/models/track.interface";
 import HttpProvider from "@/services/HttpProvider"
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 
 interface SpotifyPlayer {
   player: PlayerInterface,
@@ -14,11 +15,16 @@ interface SpotifyPlayer {
   changingTrack: boolean,
   isPlaying: boolean,
   transferPlayback: (deviceId: DeviceInterface['id'], play?: boolean) => Promise<void>,
+  nextSong: (deviceId: DeviceInterface['id']) => Promise<void>,
+  prevSong: (deviceId: DeviceInterface['id']) => Promise<void>,
+  repeat: (deviceId: DeviceInterface['id'], state: string) => Promise<void>,
+  addToQueue: (deviceId: DeviceInterface['id'], trackUri: string) => Promise<void>,
+  setOpenDevicePicker: Dispatch<SetStateAction<boolean>>,
   handleSync: (toggle: boolean) => void,
   loadPlayer: (market?: string) => Promise<PlayerInterface>,
-  loadDevices: () => void,
-  seek: (deviceId: DeviceInterface['id'], state: boolean) => void,
-  shuffle: (deviceId?: DeviceInterface['id'], state?: boolean) => void,
+  loadDevices: () => Promise<DeviceInterface[]>,
+  seek: (deviceId: DeviceInterface['id'], state: boolean) => Promise<void>,
+  shuffle: (deviceId?: DeviceInterface['id'], state?: boolean) => Promise<void>,
   play: (deviceId: DeviceInterface['id'], param: PlayRequestParams) => void,
   pause: (deviceId: DeviceInterface['id']) => void,
 }
@@ -29,6 +35,7 @@ export function SpotifyPlayerProvider({ children }) {
   const [player, setPlayer] = useState<PlayerInterface>()
   const [changingTrack, setChangingTrack] = useState<boolean>(false)
   const [activeDevice, setActiveDevice] = useState<DeviceInterface>()
+  const [openDevicePicker, setOpenDevicePicker] = useState<boolean>(false)
   const [devices, setDevices] = useState<DeviceInterface[]>([])
   const [deviceId, setDeviceId] = useState<DeviceInterface['id']>(null);
   const [track, setTrack] = useState<TrackInterface>(null);
@@ -77,6 +84,35 @@ export function SpotifyPlayerProvider({ children }) {
         setDeviceId(deviceId)
         return undefined
       })
+  }
+  
+  const nextSong: SpotifyPlayer['nextSong'] = (deviceId) => {
+    return HttpProvider.post('/api/me/player/next', {
+      device_id: deviceId
+    })
+      .then(async (res) => {
+        // reload player
+        await loadPlayer()
+        return undefined
+      })
+  }
+  
+  const prevSong: SpotifyPlayer['prevSong'] = (deviceId) => {
+    return HttpProvider.post('/api/me/player/previous', {
+      device_id: deviceId
+    })
+      .then(async (res) => {
+        // reload player
+        await loadPlayer()
+        return undefined
+      })
+  }
+  
+  const addToQueue: SpotifyPlayer['addToQueue'] = (deviceId, trackUri) => {
+    return HttpProvider.post('/api/me/player/queue', {
+      device_id: deviceId,
+      uri: trackUri
+    })
   }
 
   const play: SpotifyPlayer['play'] = (deviceId, params) => {
@@ -128,9 +164,13 @@ export function SpotifyPlayerProvider({ children }) {
       device_id: id,
       state
     })
-      .then((res) => {
-        return res
-      })
+  }
+  
+  const repeat: SpotifyPlayer['repeat'] = (id = deviceId, state) => {
+    return HttpProvider.put('/api/me/player/repeat', {
+      device_id: id,
+      state
+    })
   }
 
   const seek: SpotifyPlayer['seek'] = (deviceId, position_ms) => {
@@ -138,9 +178,6 @@ export function SpotifyPlayerProvider({ children }) {
       device_id: deviceId,
       position_ms
     })
-      .then((res) => {
-        return res
-      })
   }
 
   const loadDevices = (): Promise<DeviceInterface[]> => {
@@ -172,6 +209,11 @@ export function SpotifyPlayerProvider({ children }) {
       track,
       isPlaying,
       changingTrack,
+      repeat,
+      addToQueue,
+      nextSong,
+      prevSong,
+      setOpenDevicePicker,
       transferPlayback,
       handleSync,
       loadPlayer,
@@ -182,6 +224,7 @@ export function SpotifyPlayerProvider({ children }) {
       pause,
     }}>
       {children}
+      <Devices.Modal show={openDevicePicker} onHide={() => setOpenDevicePicker(false)} onDeviceSelected={() => setOpenDevicePicker(false)} />
     </SpotifyPlayerContext.Provider>
   )
 }

@@ -14,8 +14,9 @@ import style from "./Page.module.scss"
 import { ArtistInterface } from '@/lib/models/artist.inteface'
 import { cookies } from 'next/headers'
 import { Metadata } from 'next'
+import { IncludesGroup } from '@/lib/models/album.inteface'
 
-const loadArtist = cache(async (artistId: string) => {
+export const loadArtist = cache(async (artistId: string) => {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/artists/${artistId}`, {
     headers: { Cookie: (await cookies()).toString() as string },
     next: {
@@ -35,18 +36,19 @@ const loadArtist = cache(async (artistId: string) => {
   }
 })
 
-export async function generateMetadata({ params }: { params: Promise<{ id: ArtistInterface['id'] }>}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: ArtistInterface['id'] }> }): Promise<Metadata> {
   const { id } = await params
   const artist = await loadArtist(id) as ArtistInterface
-  
+
   return {
     title: artist.name,
     keywords: artist.genres
   }
 }
 
-export default async function ArtistPage ({ params }: { params: Promise<{ id: ArtistInterface['id'] }>}) {
+export default async function ArtistPage({ params, searchParams }: { params: Promise<{ id: ArtistInterface['id'] }>, searchParams: Promise<{ group?: IncludesGroup }> }) {
   const { id } = await params
+  const { group = "album" } = await searchParams
   const artist = await loadArtist(id) as ArtistInterface
 
   return (
@@ -64,7 +66,7 @@ export default async function ArtistPage ({ params }: { params: Promise<{ id: Ar
         </Col>
         <Col md={12} className={`page-section`}>
           <Suspense fallback={<AlbumsLoader />}>
-            <Albums artistId={artist.id} />
+            <Albums artistId={artist.id} group={group} />
           </Suspense>
         </Col>
       </Row>

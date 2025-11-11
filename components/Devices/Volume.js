@@ -2,7 +2,6 @@
 import { useState, useCallback, useMemo, useEffect } from "react"
 import debounce from 'lodash/debounce'
 import HttpProvider from '@/services/HttpProvider'
-import Spinner from "@/components/Loader/Spinner"
 import Icon from "@/components/Image/Icon"
 import style from "./Volume.module.scss"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
@@ -11,7 +10,6 @@ export default function Volume({ deviceId, volume_percent = 0, direction = "vert
   const { activeDevice, handleSync } = useSpotifyPlayer();
 
   const [currentVolume, setCurrentVolume] = useState(volume_percent || activeDevice.volume_percent)
-  const [loading, setLoading] = useState(false)
 
   const handleVolume = (e, forceToValue) => {
     e.preventDefault()
@@ -35,13 +33,11 @@ export default function Volume({ deviceId, volume_percent = 0, direction = "vert
   }, [currentVolume])
 
   const debouncedSetVolume = useMemo(() => debounce((volume) => {
-    setLoading(true)
     handleSync(false)
     return HttpProvider.put('/api/me/player/volume', {
       device_id: deviceId,
       volume_percent: volume
     }).finally(() => {
-      setLoading(false)
       setTimeout(() => {
         handleSync(true)
       }, 500)

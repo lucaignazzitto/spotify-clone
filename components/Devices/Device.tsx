@@ -12,9 +12,10 @@ interface DeviceProps {
   device?: DeviceInterface,
   showVolume?: boolean,
   className?: string
+  onDeviceSelected?: (id: DeviceInterface['id']) => void
 }
 
-function Device({ device, showVolume = true, className = "" }: DeviceProps) {
+function Device({ device, showVolume = true, className = "", onDeviceSelected = () => {}  }: DeviceProps) {
   const { activeDevice, transferPlayback, isPlaying, handleSync } = useSpotifyPlayer()
   const [loading, setLoading] = useState(false)
 
@@ -25,6 +26,9 @@ function Device({ device, showVolume = true, className = "" }: DeviceProps) {
     setLoading(true)
     handleSync(false)
     return transferPlayback(device.id, isPlaying)
+      .then(() => {
+        return onDeviceSelected(device.id)
+      })
       .finally(() => {
         setLoading(false)
         handleSync(true)

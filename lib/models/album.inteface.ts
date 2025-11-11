@@ -2,6 +2,8 @@ import { ArtistInterface } from "./artist.inteface"
 import { Restriction, Image, External_Urls, Copyrights } from "./common.interface"
 import { TrackInterface } from "./track.interface"
 
+export type IncludesGroup = "album" | "single" | "appears_on" | "compilation"
+
 export interface AlbumInterface {
   album_type: "album" | "single" | "compilation" | "ep",
   total_tracks: number,

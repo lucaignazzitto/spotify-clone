@@ -21,16 +21,10 @@ export default function GenericPlaylists({
   return (
     <div className={`${style.PlaylistWrapp} ${className}`}>
       {title ? <div>{title}</div> : null}
-      <div className={`${title ? 'mt-5' : ''}`}>
+      <div className={`${title ? 'mt-3' : ''}`}>
         {
           playlists && playlists.length ?
-            <GenericSlider
-              slidesPerView={itemsPerRow}
-              grid={{
-                fill: 'row',
-                rows: 2
-              }}
-            >
+            <GenericSlider slidesPerView={itemsPerRow}>
               {
                 playlists.map((playlist, index) => (
                   <Playlist playlist={playlist} key={index} />

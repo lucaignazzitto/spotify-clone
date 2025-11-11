@@ -2,8 +2,9 @@
 import { MouseEvent, ReactNode, useCallback, useEffect, useState } from "react"
 import { useRouter } from 'next/navigation';
 import HttpProvider from '@/services/HttpProvider'
-import Icon from '@/components/Image/Icon'
+import Icon, { IconProps } from '@/components/Image/Icon'
 import Spinner from "../Loader/Spinner";
+import { revalidateByPath, revalidateByTag } from "@/app/actions/revalidate";
 
 interface Props {
   ids?: string
@@ -11,6 +12,7 @@ interface Props {
   className?: string
   type?: string
   animate?: boolean,
+  iconProps?: IconProps,
   onClick?: () => void
 }
 
@@ -26,6 +28,7 @@ export default function LikeButton({
   className = "",
   type = "track",
   animate = true,
+  iconProps = {},
   onClick = () => { },
   ...props
 }: Props) {
@@ -34,7 +37,7 @@ export default function LikeButton({
   const [isLiked, setIsLiked] = useState<boolean>(false)
 
   const checkForLike = useCallback(() => {
-    const url = type === 'track' ? '/api/me/tracks/contains' : '/api/me/album/contains'
+    const url = type === 'track' ? '/api/me/tracks/contains' : '/api/me/albums/contains'
     return HttpProvider.get(url, {
       params: {
         ids
@@ -51,14 +54,16 @@ export default function LikeButton({
   const handleClick = (e: MouseEvent) => {
     e.preventDefault()
     setLoading(true)
-    const url = '/api/me/tracks'
+    const url = type === 'track' ? '/api/me/tracks' : '/api/me/albums'
     const params = {
       ids
     }
     const httpMethod = isLiked ? HttpProvider.delete(url, { data: params }) : HttpProvider.put(url, params)
     return httpMethod
-      .then((res) => {
+      .then(async (res) => {
         setIsLiked(like => like = !like)
+        await revalidateByTag(type === "track" ? "saved-tracks" : "saved-albums")
+        await revalidateByPath("/profile", 'layout')
         return res
       })
       .finally(() => {
@@ -84,7 +89,7 @@ export default function LikeButton({
       {
         loading ? <Spinner show={true} width={20} height={20} />
           : <>
-            <Icon id={isLiked ? 'heart-active' : 'heart'} color={isLiked ? '#1ed760' : ''} width={20} height={20} />
+            <Icon id={isLiked ? 'heart-active' : 'heart'} color={isLiked ? '#1ed760' : ''} width={20} height={20} {...iconProps} />
             {label}
           </>
       }

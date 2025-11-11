@@ -6,25 +6,27 @@ import Spinner from "@/components/Loader/Spinner"
 import PlayerStore from "@/stores/PlayerStore"
 import Icon from '@/components/Image/Icon'
 import Button from "@/components/Buttons/Button"
+import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
 
 /**
  * set shuffle
  */
-function ShuffleButton ({ className = "btn btn-none" }) {
-  const [ loading, setLoading ] = useState(false) 
+function ShuffleButton({ className = "btn btn-none", ...props }: { className?: string }) {
+  const { player, deviceId, shuffle, loadPlayer } = useSpotifyPlayer()
+
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const player = PlayerStore.getPlayer
-  const deviceId = PlayerStore.getPlayerId
 
   const shuffleState = useMemo(() => {
     return player?.shuffle_state || false
   }, [player])
 
-  const handleClick = (e) => {
-    e.preventDefault()
+  const handleClick = () => {
     setLoading(true)
-    return PlayerStore.shuffle(deviceId, !shuffleState)
-      .then(() => {
+    return shuffle(deviceId, !shuffleState)
+      .then(async () => {
+        // reload player
+        await loadPlayer()
         router.refresh()
       })
       .finally(() => {
@@ -35,11 +37,12 @@ function ShuffleButton ({ className = "btn btn-none" }) {
   return (
     <Button
       className={`hover-anim ${className}`}
+      role="button"
       disabled={!deviceId}
       aria-label="Shuffle list"
       text={
-        loading ? <Spinner show={true}  />
-        : <Icon id='shuffle' color={shuffleState ? '#1ed760' : ''} />
+        loading ? <Spinner show={true} />
+          : <Icon id='shuffle' color={shuffleState ? '#1ed760' : ''} />
       }
       onClick={handleClick}
     />

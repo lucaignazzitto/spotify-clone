@@ -32,7 +32,7 @@ export default async function FollowingArtist ({ className = "" }: { className?:
   return (
     <div className={`${style.TopFollowingArtistsList} ${className}`}>
       <span className={`section-title`}>Following Artists</span>
-      <div className={`mt-4 mt-lg-5`}>
+      <div className={`mt-3 mt-lg-4`}>
         <GenericSlider>
           {
             artists.map((artist, index) => (

@@ -32,10 +32,10 @@ export default async function Tracks ({ artistId }: { artistId: ArtistInterface[
   return (
     <div>
       <span className={`section-title`}>Popular songs</span>
-      <div className="mt-4 mt-lg-5">
+      <div className="mt-3 mt-lg-4">
         {
           tracks.map((track, index) => (
-            <Track track={track} key={index} showImage={true} showNumber={true} showAlbum numberLabel={index + 1} showOptions={true} />
+            <Track track={track} parentUri={track.album.uri} key={index} showImage={true} showNumber={true} showAlbum numberLabel={index + 1} showOptions={true} />
           ))
         }
         {

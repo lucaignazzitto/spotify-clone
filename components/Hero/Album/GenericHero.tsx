@@ -66,7 +66,7 @@ export default function GenericAlbumHero ({ album, type = "album", showExtras = 
               </div>
             }
             <div className={style.GernericAlbumHeroWrapperControllersLine}>
-              { type === "album" && showLike ? <LikeButton ids={album.id} type={type} aria-label={`Save track ${album.name}`} /> : null }
+              { type === "album" && showLike ? <LikeButton ids={album.id} type={type} aria-label={`Save track ${album.name}`} iconProps={{ width: 24, height: 24 }} /> : null }
             </div>
           </div>
         </>

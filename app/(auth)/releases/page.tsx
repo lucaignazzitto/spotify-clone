@@ -41,7 +41,7 @@ export default async function page() {
       <div>
         <h1 className="page-title">News</h1>
         <p>Latest release for following artist, podcast and show</p>
-        <div className={`mt-4 mt-lg-5`}>
+        <div className={`mt-3 mt-lg-4`}>
           <Row>
             { albums.items.map((item) => (
               <Col xs={12} key={item.id} className='mb-4'>

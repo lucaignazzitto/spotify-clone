@@ -1,12 +1,10 @@
 'use client'
-import { observer } from "mobx-react-lite"
 import { usePathname } from 'next/navigation'
 import SliderNavigation from "./Navigation/SliderNavigation"
 import LinkToArtist from '@/components/Artists/LinkToArtist'
 import LikeButton from '@/components/Buttons/Like'
 import NextButton from "@/components/Me/Player/Next"
 import PreviousButton from "@/components/Me/Player/Previous"
-import PlayerStore from "@/stores/PlayerStore"
 import ShuffleButton from "@/components/Me/Player/Shuffle"
 import PlayPause from "@/components/Me/Player/PlayPause"
 import RepeatButton from '@/components/Me/Player/Repeat';
@@ -18,10 +16,8 @@ import style from "./PlayerRecap.module.scss"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
 
 function PlayerRecap() {
-  const { player, deviceId } = useSpotifyPlayer()
-
   const pathname = usePathname()
-  const track = player?.item || {}
+  const { player, track, deviceId } = useSpotifyPlayer()
 
   return (
     <div className={`player-recap ${style.recapPlayerWrapp}`}>
@@ -32,7 +28,7 @@ function PlayerRecap() {
         <div className={`${style.recapPlayerWrappContentTrack}`}>
           <div className={`${style.recapPlayerWrappContentTrackTitle}`}>
             {track.explicit ? <span className="explicit me-2">E </span> : null}
-            {track.name}
+            {track?.name}
           </div>
           <div className={`${style.recapPlayerWrappContentTrackArtist}`}>
             <LinkToArtist artists={track.artists} />
@@ -47,26 +43,20 @@ function PlayerRecap() {
               <ShuffleButton className="btn btn-none" />
             </div>
             <div className={`${style.recapPlayerWrappContentActions} `}>
-              <PreviousButton className="btn btn-none" refreshOnComplete={false} />
+              <PreviousButton className="btn btn-none" />
             </div>
             <div className={`${style.recapPlayerWrappContentActions}`}>
-              <PlayPause
-                deviceId={deviceId}
-                disabled={!deviceId}
-                position_ms={player.progress_ms}
-                offsetPosition={player?.item?.track_number || 0}
-                element={player}
-              />
+              <PlayPause deviceId={deviceId} disabled={!deviceId} element={player} />
             </div>
             <div className={`${style.recapPlayerWrappContentActions}`}>
-              <NextButton className="btn btn-none" refreshOnComplete={false} />
+              <NextButton className="btn btn-none" />
             </div>
             <div className={`${style.recapPlayerWrappContentActions}`}>
               <RepeatButton className="btn btn-none" />
             </div>
           </div>
           <div className={`${style.recapPlayerWrappContentProgress}`}>
-            <ProgressBar isPlaying={player.is_playing} startAt={player.progress_ms} max={player?.item?.duration_ms} />
+            <ProgressBar startAt={player.progress_ms} max={player?.item?.duration_ms} />
           </div>
           <div className={`${style.recapPlayerWrappContentDevices}`}>
             <div className={` ${style.recapPlayerWrappContentActions}`}>
@@ -85,4 +75,4 @@ function PlayerRecap() {
   )
 }
 
-export default observer(PlayerRecap)
+export default PlayerRecap
