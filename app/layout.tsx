@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 // CUSTOM META DATA
 import { customMetaData } from "@/services/AdditionalMetaData"
 import '@/styles/global.scss'
+import './main.css'
 import { ReactNode } from 'react';
 import { Metadata, Viewport } from 'next';
 
@@ -78,7 +79,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           })
         }
       </head>
-      <body className={poppinsFont.className}>
+      <body className={`${poppinsFont.className} text-sm!`}>
         <ToastContainer hideProgressBar={true} />
         <SvgSprite />
         {children}

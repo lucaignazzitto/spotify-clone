@@ -51,7 +51,7 @@ export default function Tracks({
             tracks && tracks.length ?
               Object.keys(traksByDisk).map((disc_number) => (
                 <div key={disc_number}>
-                  {hasMultipleDisc && <div className='my-3 px-2 fs-12 text-muted w-500'><Icon id="disc" color='#c1c1c1' width={20} /> <span className='ps-2'>Disc {disc_number}</span></div>}
+                  {hasMultipleDisc && <div className='my-3 px-2 text-xs text-gray-300 w-500'><Icon id="disc" color='#c1c1c1' width={20} /> <span className='pl-2'>Disc {disc_number}</span></div>}
                   {
                     traksByDisk[disc_number].map((track, index) => (
                       <div className='w-full' key={`${track.id}-${index}`}>

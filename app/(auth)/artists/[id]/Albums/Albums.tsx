@@ -55,27 +55,27 @@ export default async function Albums({ artistId, group = "album" }: { artistId: 
   return (
     <div className={style.albumsList}>
       <div>
-        <div className='d-flex align-items-center justify-content-between'>
+        <div className='flex items-center justify-between'>
           <span className={`section-title`}>Discography</span>
-          <Link href={`/artists/${artistId}/album/${group}`} className='fs-14 text-muted'>View all</Link>
+          <Link href={`/artists/${artistId}/album/${group}`} className='text-sm text-gray-300!'>View all</Link>
         </div>
-        <div className='d-flex align-items-center gap-3 mt-3'>
+        <div className='flex items-center gap-3 mt-3'>
           {
             ALBUMNS_GROUP.map((type) => (
               <Link href={{ query: { group: type.group } }} scroll={false} key={type.group} className={`btn btn-small btn-rounded ${group === type.group ? 'btn-light' : 'btn-dark'} fs-12`}>{type.title}</Link>
             ))
           }
         </div>
-        <div className={style.albumsListWrapp}>
+        <div className={"w-full mt-8"}>
           <GenericAlbums albums={albums} />
         </div>
       </div>
       <div className='mt-5 pt-4'>
-        <div className='d-flex align-items-center justify-content-between'>
+        <div className='flex items-center justify-between'>
           <span className={`section-title`}>Discovered also in</span>
-          <Link href={`/artists/${artistId}/album/appears_on`} className='fs-14 text-muted'>View all</Link>
+          <Link href={`/artists/${artistId}/album/appears_on`} className='text-sm text-gray-300'>View all</Link>
         </div>
-        <div className={style.albumsListWrapp}>
+        <div className={"w-full mt-8"}>
           <GenericAlbums albums={albumsAppears} />
         </div>
       </div>

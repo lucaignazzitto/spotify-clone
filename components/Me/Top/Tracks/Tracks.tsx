@@ -28,14 +28,14 @@ export default async function MyTopArtist({ className = "" }: { className?: stri
   const tracks = await load()
 
   return (
-    <div className={`${style.TopTracksList} ${className}`}>
+    <div className={`${className}`}>
       <span className={`section-title`}>My top Tracks</span>
-      <div className={`${style.TopTracksListWrapp} mt-3 mt-lg-4`}>
+      <div className={`relative mt-3 mt-lg-4`}>
         <Row>
           {
             tracks.map((track, index) => (
               <Col md={6} xl={3} key={index}>
-                <Track track={track} parentUri={track.album.uri} showImage={true} className={style.TopTracksListWrappTrack} />
+                <Track track={track} parentUri={track.album.uri} showImage={true} className='mb-5' />
               </Col>
             ))
           }

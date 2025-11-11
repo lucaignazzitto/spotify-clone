@@ -1,5 +1,3 @@
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import pageBg from "@/public/images/bubble-3.jpg"
 import { cookies } from 'next/headers';
 import BackgroundHandler from '@/components/Backound/Handler'
@@ -42,13 +40,11 @@ export default async function page() {
         <h1 className="page-title">News</h1>
         <p>Latest release for following artist, podcast and show</p>
         <div className={`mt-3 mt-lg-4`}>
-          <Row>
-            { albums.items.map((item) => (
-              <Col xs={12} key={item.id} className='mb-4'>
-                <ReleaseAlbum album={item} useType={true} />
-              </Col>
-            ))}
-          </Row>
+          { albums.items.map((item) => (
+            <div key={item.id} className='mb-4'>
+              <ReleaseAlbum album={item} useType={true} />
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -2,11 +2,9 @@ import { cookies } from "next/headers"
 import pageBg from "@/public/images/bubble-3.jpg"
 import Hero from "./Hero/Hero"
 import GenericPlaylists from "@/components/Playlists/GenericPlaylists"
-import style from "./Page.module.scss"
 import BackgroundHandler from "@/components/Backound/Handler"
 import { AlbumInterface } from "@/lib/models/album.inteface"
 import Albums from "@/components/Albums/GenericAlbums"
-import ReleaseAlbum from "@/components/Release/Album"
 
 const limit = 20
 async function loadPlaylist(id) {
@@ -71,7 +69,7 @@ export default async function Profile({ params }: { params: Promise<{ id: string
   const albums = await loadSavedAlbum() as any
 
   return (
-    <div className={style.Homepage}>
+    <div>
       <BackgroundHandler src={pageBg} />
       {
         me && Object.keys(me).length ?

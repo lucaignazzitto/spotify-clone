@@ -2,7 +2,6 @@
 import Me from "@/components/Me/Me"
 import Icon from '@/components/Image/Icon'
 import Link from 'next/link'
-import style from "./Menu.module.scss"
 import { usePathname } from "next/navigation"
 import { UserInterface } from "@/lib/models/user.interface"
 
@@ -18,7 +17,7 @@ export default function Menu({ user, className = "" }: { user: UserInterface, cl
     {
       name: 'liked',
       iconId: 'heart',
-      href: `/profile/${user.id}/saved`,
+      href: `/profile/${user?.id}/saved`,
     },
     {
       name: 'releases',
@@ -39,14 +38,14 @@ export default function Menu({ user, className = "" }: { user: UserInterface, cl
   ]
 
   return (
-    <div className={`${style.SidebarMenu} ${className}`}>
-      <div className={`${style.SidebarMenuLogo}`}>
+    <div className={`relative h-full flex justify-center items-center flex-row-reverse lg:flex-col! ${className}`}>
+      <div>
         <Me user={user} />
       </div>
-      <ul className={`${style.SidebarMenuUl}`}>
+      <ul className={`w-full list-none p-0 m-auto grid grid-cols-[repeat(5,minmax(auto,30px))] gap-x-5 md:gap-x-8 lg:gap-x-12 lg:flex lg:w-[inherit] lg:items-center lg:flex-col`}>
         {
           linkLegend.map((list) => (
-            <li className={`${style.SidebarMenuUlList} ${pathname === list.href ? style.SidebarMenuUlListActive : ''}`} key={list.name}>
+            <li className={`inline-block cursor-pointer self-center justify-self-center lg:mb-14 ${pathname === list.href ? 'text-green-600 fill-green-600' : ''}`} key={list.name}>
               {
                 list.href ?
                   <Link href={list.href} className='hover-anim' prefetch={list?.prefetch ?? true} aria-label={list.name}>

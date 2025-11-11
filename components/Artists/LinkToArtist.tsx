@@ -10,10 +10,10 @@ interface Props {
 
 export default function LinkToArtist({ artists = [], className = "" }: Props) {
   return (
-    <div className={`${style.LinkToArtistWrapp} ${className}`}>
+    <div className={`relative ${className}`}>
       {artists.map((artist, index) => (
         <React.Fragment key={index}>
-          <Link key={index} href={{ pathname: `/artists/${artist.id}` }}>
+          <Link key={index} href={{ pathname: `/artists/${artist.id}` }} className="hover:underline">
             {artist.name}
           </Link>
           {artists.length !== index + 1 ? ', ' : ''}

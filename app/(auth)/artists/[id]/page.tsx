@@ -52,7 +52,7 @@ export default async function ArtistPage({ params, searchParams }: { params: Pro
   const artist = await loadArtist(id) as ArtistInterface
 
   return (
-    <Container fluid className={`artist-page ${style.ArtistWrapper}`}>
+    <Container fluid className={`artist-page relative h-full`}>
       <Row>
         <Col lg={6}>
           <Suspense fallback={<ArtistHeroLoader />}>

@@ -1,14 +1,11 @@
 'use client'
 import AppIcon from '@/components/Image/Icon'
 import Logo from "@/components/Logo/Logo"
-import style from './Navigation.module.scss'
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { MouseEvent } from 'react'
-import Link from 'next/link'
 
 export default function HeaderNavigation({ className = "" }: { className?: string }) {
   const router = useRouter()
-  const pathname = usePathname()
 
   const goTo = (e: MouseEvent<HTMLButtonElement>, direction: string) => {
     e.preventDefault()
@@ -20,23 +17,23 @@ export default function HeaderNavigation({ className = "" }: { className?: strin
   }
 
   return (
-    <div className={`${style.NavigationWrapper} ${className}`}>
-      <div className={style.NavigationWrapperInner}>
-        <div className={`${style.NavigationWrapperInnerCard} d-none d-lg-block`}>
-          <div className={style.NavigationWrapperInnerCardNav}>
-            <div className={style.NavigationWrapperInnerCardNavCta}>
+    <div className={`relative ${className}`}>
+      <div className="relative grid grid-cols-[auto_1fr] items-center">
+        <div className={`relative hidden lg:block`}>
+          <div className={"p-1 grid grid-cols-[auto_auto] items-center gap-3 rounded-4xl backdrop-blur-xs bg-black/0"}>
+            <div className={"p-1.5 cursor-pointer"}>
               <button className="btn btn-none hover-anim" onClick={(e) => goTo(e, 'back')} aria-label='navigate back'>
                 <AppIcon id='left-arrow'></AppIcon>
               </button>
             </div>
-            <div className={style.NavigationWrapperInnerCardNavCta}>
+            <div className={"p-1.5 cursor-pointer"}>
               <button className="btn btn-none hover-anim" onClick={(e) => goTo(e, 'forward')} aria-label='navigate forward'>
                 <AppIcon id='right-arrow'></AppIcon>
               </button>
             </div>
           </div>
         </div>
-        <div className={`${style.NavigationWrapperInnerCard} ${style.NavigationWrapperInnerCardPlayer}`}>
+        <div className={`relative justify-self-end`}>
           <Logo />
         </div>
       </div>

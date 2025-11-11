@@ -15,14 +15,14 @@ export default async function Hero({ artist, useImage = true }: { artist: Artist
   }
 
   return (
-    <div className={style.ArtistHeroWrapper}>
+    <div>
       {
         heroImage && heroImage.url ? <div className={style.ArtistHeroWrapperHeroBack} style={{ backgroundImage: `url(${heroImage.url})` }} /> : null
       }
       <div>
-        <div className={style.ArtistHeroWrapperFollowers}>{formatNumber(artist?.followers?.total)} Followers</div>
-        <h1 className={style.ArtistHeroWrapperTitle}>{artist?.name}</h1>
-        <div className={style.ArtistHeroWrapperFollow}>
+        <div className={"m-0 text-gray-300 font-medium max-w-[500px]"}>{formatNumber(artist?.followers?.total)} Followers</div>
+        <h1 className="text-7xl! mt-10!">{artist?.name}</h1>
+        <div>
           <FollowButton type={artist.type} ids={artist.id} />
         </div>
       </div>

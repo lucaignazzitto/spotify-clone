@@ -47,11 +47,11 @@ export default async function SavedTracks() {
   const saved = await load()
 
   return (
-    <div className={style.saveTracksPage}>
+    <div className={"relative"}>
       <BackgroundHandler src={pageBg} />
       <GernericAlbumHero album={saved.album} showLike={false} />
       <section className={`page-section`}>
-        <Tracks tracks={saved.items} showImage={true} showOptions={true} className={style.saveTracksPageTracks} />
+        <Tracks tracks={saved.items} showImage={true} showOptions={true} />
       </section>
     </div>
   )

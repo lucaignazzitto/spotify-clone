@@ -1,5 +1,4 @@
 'use client'
-import { useState, useEffect } from "react"
 import { millisToMinutesAndSeconds } from '@/utils/helpers'
 import Link from "next/link"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -51,7 +50,7 @@ function Track({
   numberLabel = '',
   className = ""
 }: Props) {
-  const { player, track: playingTrack } = useSpotifyPlayer() as any
+  const { track: playingTrack } = useSpotifyPlayer() as any
   const [large, medium, small] = track?.album?.images || []
   const image = medium || large || small
 
@@ -109,8 +108,8 @@ function Track({
                   </span>
               }
               <div className={`track-inner-content-album-artist ${style.trackWrappInnerContentAlbumArtist}`}>
-                <LinkToArtist artists={track.artists} />
-                {(track?.album?.id && showAlbum) && <>• <LinkToAlbum album={track.album} /></>}
+                <LinkToArtist artists={track.artists} className={style.trackWrappInnerContentAlbumArtistLink} />
+                {(track?.album?.id && showAlbum) && <>• <LinkToAlbum album={track.album} className={style.trackWrappInnerContentAlbumArtistLink} /></>}
               </div>
             </div>
             {

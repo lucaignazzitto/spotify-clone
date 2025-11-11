@@ -1,6 +1,5 @@
 import Playlist from '@/components/Playlists/Playlist'
 import GenericSlider from '@/components/Slider/GenericSlider'
-import style from "@/components/Playlists/GenericPlaylist.module.scss"
 import { PlaylistInterface } from '@/lib/models/playlist.interface'
 import { ReactNode } from 'react'
 
@@ -19,7 +18,7 @@ export default function GenericPlaylists({
 }: Props) {
 
   return (
-    <div className={`${style.PlaylistWrapp} ${className}`}>
+    <div className={`${className}`}>
       {title ? <div>{title}</div> : null}
       <div className={`${title ? 'mt-3' : ''}`}>
         {

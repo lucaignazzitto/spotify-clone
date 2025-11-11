@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+.section-title {
+  font-weight: 500;
+  @apply text-gray-300;
+}
