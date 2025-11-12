@@ -1,9 +1,9 @@
+import { cookies } from 'next/headers';
+import { Metadata } from 'next'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import pageBg from "@/public/images/bubble-3.jpg"
-import { cookies } from 'next/headers';
 import BackgroundHandler from '@/components/Backound/Handler'
-import { Metadata } from 'next'
 import ReleaseAlbum from '@/components/Release/Album'
 
 async function getReleases() {

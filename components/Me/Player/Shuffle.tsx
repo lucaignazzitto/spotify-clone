@@ -11,7 +11,7 @@ import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
 /**
  * set shuffle
  */
-function ShuffleButton({ className = "btn btn-none", ...props }: { className?: string }) {
+function ShuffleButton({ className = "btn btn-none", iconSize }: { className?: string, iconSize?: number }) {
   const { player, deviceId, shuffle, loadPlayer } = useSpotifyPlayer()
 
   const [loading, setLoading] = useState(false)
@@ -42,7 +42,7 @@ function ShuffleButton({ className = "btn btn-none", ...props }: { className?: s
       aria-label="Shuffle list"
       text={
         loading ? <Spinner show={true} />
-          : <Icon id='shuffle' color={shuffleState ? '#1ed760' : ''} />
+          : <Icon id='shuffle' color={shuffleState ? '#1ed760' : ''} width={iconSize} height={iconSize} />
       }
       onClick={handleClick}
     />

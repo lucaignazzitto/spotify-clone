@@ -13,7 +13,7 @@ export default function SearchList({ results }: { results?: SearchInterface }) {
         <Artists direction='horizontal' artists={results?.artists?.items} title={"Artists"} />
       </section>
       <section className={`page-section`}>
-        <GenericAlbums albums={results?.albums?.items} title={"Albums"} />
+        <GenericAlbums albums={results?.albums?.items} title={"Albums"} useLinkToArtist />
       </section>
     </div>
   )

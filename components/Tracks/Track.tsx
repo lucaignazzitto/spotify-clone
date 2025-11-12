@@ -94,23 +94,21 @@ function Track({
             <div className={`track-inner-content-album ${style.trackWrappInnerContentAlbum}`}>
               {
                 track?.album?.id ?
-                  <Link href={{
-                    pathname: `/albums/${track.album.id}`
-                  }}>
-                    <span className={`track-inner-content-album-title truncate-2 ${style.trackWrappInnerContentAlbumTitle}`}>
+                  <Link href={`/albums/${track.album.id}`} className="text-truncate d-block" title={track.name}>
+                    <span className={`track-inner-content-album-title ${style.trackWrappInnerContentAlbumTitle}`}>
                       {track.explicit ? <span className="explicit me-2">E </span> : null}
                       {track.name}
                     </span>
                   </Link>
                   :
-                  <span className={`track-inner-content-album-title truncate-2 ${style.trackWrappInnerContentAlbumTitle}`}>
+                  <p className={`track-inner-content-album-title text-truncate mb-0 ${style.trackWrappInnerContentAlbumTitle}`} title={track.name}>
                     {track.explicit ? <span className="explicit me-2">E </span> : null}
                     {track.name}
-                  </span>
+                  </p>
               }
               <div className={`track-inner-content-album-artist ${style.trackWrappInnerContentAlbumArtist}`}>
-                <LinkToArtist artists={track.artists} />
-                {(track?.album?.id && showAlbum) && <>• <LinkToAlbum album={track.album} /></>}
+                <LinkToArtist artists={track.artists} className="text-nowrap" />
+                {(track?.album?.id && showAlbum) && <>• <LinkToAlbum album={track.album} className="text-nowrap" /></>}
               </div>
             </div>
             {

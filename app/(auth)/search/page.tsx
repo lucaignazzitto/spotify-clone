@@ -1,15 +1,15 @@
+import { SearchInterface } from '@/lib/models/search.interface';
+import { CategoryInteface } from '@/lib/models/category.interface';
+import { cookies } from 'next/headers';
+import { Metadata } from 'next'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Categories from '@/components/Categories/Categories'
 import pageBg from "@/public/images/bubble-3.jpg"
-import { SearchInterface } from '@/lib/models/search.interface';
-import { CategoryInteface } from '@/lib/models/category.interface';
-import { cookies } from 'next/headers';
 import SearchList from '@/components/Search/List'
 import SearchBar from '@/components/Search/SearchBar'
 import BackgroundHandler from '@/components/Backound/Handler'
-import { Metadata } from 'next'
 
 async function getCategories() {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/browse/categories?limit=${12}`, {
@@ -72,7 +72,7 @@ export default async function SearchPage({
         <Row>
           <Col xs={12} lg={10} xl={8} className="mx-auto">
             <h1 className="page-title">What do you wanna hear?</h1>
-            <section className={`page-section`}>
+            <section className={`pt-4`}>
               <SearchBar value={keyword} useUrlToStore />
             </section>
           </Col>

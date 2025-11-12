@@ -2,7 +2,6 @@ import { cookies } from 'next/headers'
 import Container from 'react-bootstrap/Container'
 import pageBg from "@/public/images/bubble-3.jpg"
 import GernericAlbumHero from "@/components/Hero/Album/GenericHero"
-import style from "./Page.module.scss"
 import BackgroundHandler from '@/components/Backound/Handler'
 import { PlaylistInterface } from '@/lib/models/playlist.interface'
 import Track from '@/components/Tracks/Track'
@@ -43,23 +42,21 @@ export default async function Playlist({ params }: { params: Promise<{ id: strin
   const playlist = await loadPlaylist(id) as PlaylistInterface
 
   return (
-    <Container fluid className={style.AlbumPage}>
+    <Container fluid className={"mb-5"}>
       <BackgroundHandler src={pageBg} />
-      <div>
-        <GernericAlbumHero album={playlist} type={playlist.type} />
-      </div>
-      <div>
+      <GernericAlbumHero album={playlist} type={playlist.type} />
+      <div className='mt-5'>
         {
-          playlist?.tracks?.items?.map(({ track }: { track: TrackInterface }) => (
+          playlist?.tracks?.items?.map(({ track }: { track: TrackInterface }, index: number) => (
             <Track
-              key={track.id}
+              key={`${index}-${track.id}`}
               track={track}
               from={"playlist"}
               parentUri={playlist.uri}
               playlistId={playlist.id}
               showImage={true}
               showOptions={true}
-              className={style.AlbumPageTracks}
+              className={"mt-4 mb-2"}
             />
           ))
         }

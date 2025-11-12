@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers'
 import pageBg from "@/public/images/bubble-3.jpg"
-import style from "./Page.module.scss"
 import BackgroundHandler from '@/components/Backound/Handler'
 import GenericAlbumHero from '@/components/Hero/Album/GenericHero'
 import { CategoryInteface } from '@/lib/models/category.interface'
@@ -29,7 +28,7 @@ export default async function CategoriesPage ({ params }: { params: Promise<{ id
   const category = await loadCategory(id)
 
   return (
-    <div className={style.CategoryPage}>
+    <div className={"mb-5"}>
       <BackgroundHandler src={pageBg} />
       <GenericAlbumHero album={category} showExtras={false} showShuffle={false} showPlay={false} showLike={false} />
       <div className='mt-3 mt-lg-4'>

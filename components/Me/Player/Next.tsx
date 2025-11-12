@@ -8,12 +8,13 @@ import { ButtonProps } from "react-bootstrap";
 
 interface NextSongProps extends ButtonProps {
   className?: string,
+  iconSize?: number
 }
 
 /**
  * go to next track
  */
-function NextButton ({ className = "", ...props }: NextSongProps) {
+function NextButton ({ className = "", iconSize, ...props }: NextSongProps) {
   const { deviceId, nextSong } = useSpotifyPlayer()
   const [ loading, setLoading ] = useState<boolean>(false) 
 
@@ -32,7 +33,7 @@ function NextButton ({ className = "", ...props }: NextSongProps) {
       role="button"
       text={
         loading ? <Spinner show={true}  />
-        : <Icon id='track-next'></Icon>
+        : <Icon id='track-next' width={iconSize} height={iconSize}></Icon>
       }
       onClick={handleClick}
       {...props}

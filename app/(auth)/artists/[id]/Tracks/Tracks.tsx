@@ -7,7 +7,7 @@ const limit = 5
 const market = 'IT'
 
 async function load (artistId: ArtistInterface['id']) {
-  const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/artists/${artistId}/top-tracks?market=${market}`, {
+  const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/artists/${artistId}/top-tracks?market=${market}&limit=${limit}`, {
     headers: { Cookie: (await cookies()).toString() as string },
     next: {
       revalidate: 3600,
@@ -19,19 +19,19 @@ async function load (artistId: ArtistInterface['id']) {
     return response.json()
       .then((res) => {
         const { tracks = [] } = res
-        return tracks.slice(0, limit)
+        return tracks
       })
   } else {
     return []
   }
 }
 
-export default async function Tracks ({ artistId }: { artistId: ArtistInterface['id'] }) {
+export default async function Tracks ({ artistId, title = "Popular songs" }: { artistId: ArtistInterface['id'], title?: string }) {
   const tracks = await load(artistId) as TrackInterface[]
 
   return (
     <div>
-      <span className={`section-title`}>Popular songs</span>
+      <span className={`section-title`}>{title}</span>
       <div className="mt-3 mt-lg-4">
         {
           tracks.map((track, index) => (

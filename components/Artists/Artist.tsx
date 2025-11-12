@@ -1,15 +1,16 @@
 import Link from "next/link"
 import style from "./Artist.module.scss"
-import Image from "next/image"
+import Image, { ImageProps } from "next/image"
 import { mediaPlaceholder } from "@/utils/helpers"
 import { ArtistInterface } from "@/lib/models/artist.inteface"
 
 interface Props {
   artist: ArtistInterface,
   showType?: boolean
+  imageProps?: ImageProps
 }
 
-export default function Artist({ artist, showType = false }: Props) {
+export default function Artist({ artist, showType = false, imageProps }: Props) {
   const [big, medium, small] = artist?.images
   const image = big || medium || small
 
@@ -28,7 +29,8 @@ export default function Artist({ artist, showType = false }: Props) {
               placeholder="blur"
               blurDataURL={mediaPlaceholder}
               className="img-fluid w-100"
-              style={{ aspectRatio: 1 }}
+              style={{ aspectRatio: 1, objectFit: 'cover' }}
+              {...imageProps}
             />
             {showType ? <div className={style.ArtistWrappInnerType}>{artist.type}</div> : null}
           </div>

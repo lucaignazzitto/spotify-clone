@@ -3,12 +3,10 @@ import pageBg from "@/public/images/bubble-3.jpg"
 import likedSongs from "@/public/images/liked-songs.png"
 import GernericAlbumHero from "@/components/Hero/Album/GenericHero"
 import Tracks from "@/components/Tracks/Tracks"
-import style from "./Page.module.scss"
 import BackgroundHandler from "@/components/Backound/Handler"
 import { TrackInterface } from "@/lib/models/track.interface"
 import { AlbumInterface } from "@/lib/models/album.inteface"
 import { Metadata } from "next"
-import { PlaylistInterface } from "@/lib/models/playlist.interface"
 
 const market = 'IT'
 const limit = 20
@@ -47,11 +45,11 @@ export default async function SavedTracks() {
   const saved = await load()
 
   return (
-    <div className={style.saveTracksPage}>
+    <div className={"position-relative"}>
       <BackgroundHandler src={pageBg} />
       <GernericAlbumHero album={saved.album} showLike={false} />
       <section className={`page-section`}>
-        <Tracks tracks={saved.items} showImage={true} showOptions={true} className={style.saveTracksPageTracks} />
+        <Tracks tracks={saved.items} showImage={true} showOptions={true} />
       </section>
     </div>
   )

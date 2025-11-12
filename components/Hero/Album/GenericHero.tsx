@@ -8,9 +8,14 @@ import Image from 'next/image'
 import { mediaPlaceholder } from '@/utils/helpers'
 import { AlbumInterface } from '@/lib/models/album.inteface'
 import { PlaylistInterface } from '@/lib/models/playlist.interface'
+import { ArtistInterface } from '@/lib/models/artist.inteface'
+import { Stack } from 'react-bootstrap'
+import Artist from '@/components/Artists/Artist'
+import ArtistAvatar from '@/components/Artists/Avatar'
 
 interface Props {
   album: PlaylistInterface | AlbumInterface
+  artists?: ArtistInterface[]
   type?: string
   showExtras?: boolean
   showLike?: boolean
@@ -18,7 +23,7 @@ interface Props {
   showShuffle?: boolean
 }
 
-export default function GenericAlbumHero ({ album, type = "album", showExtras = true, showLike = true, showPlay = true, showShuffle = true }: Props) {
+export default function GenericAlbumHero ({ album, artists = [], type = "album", showExtras = true, showLike = true, showPlay = true, showShuffle = true }: Props) {
   const heroImage = album?.images?.[0] || null
 
   return (
@@ -33,24 +38,33 @@ export default function GenericAlbumHero ({ album, type = "album", showExtras = 
               </div> : null
             }
             <div className={style.GernericAlbumHeroWrapperInfo}>
-              <span className={style.GernericAlbumHeroWrapperInfoType}>{album.type}</span>
-              <div>
+              <Stack direction="vertical" gap={{ xs: 2, lg: 3 }}>
                 <h1 className={style.GernericAlbumHeroWrapperInfoTitle}>{album.name}</h1>
-              </div>
-              {
-                showExtras ?
-                  type === "album" ?
-                    <span className={style.GernericAlbumHeroWrapperInfoType}>Released on <b>{dayjs((album as AlbumInterface).release_date).format('MMM YYYY')}</b> - <b>{(album as AlbumInterface).total_tracks} tracks</b></span>
-                  :
-                  <>
-                    <p className={style.GernericAlbumHeroWrapperInfoDescription}>{(album as PlaylistInterface).description}</p>
-                    <p className={style.GernericAlbumHeroWrapperInfoRelease}>
-                      { (album as PlaylistInterface)?.owner?.display_name ? `Created by ${(album as PlaylistInterface).owner.display_name} – ` : null }
-                      <b>{(album as PlaylistInterface).tracks.total} tracks</b>
-                    </p>
-                  </>
-                : null
-              }
+                {
+                  artists.length > 0 && 
+                  <Stack direction="horizontal" gap={2}>
+                    {
+                      artists?.map(artist => (
+                        <ArtistAvatar key={artist.id} artist={artist} />
+                      ))
+                    }
+                  </Stack>
+                }
+                {
+                  showExtras ?
+                    type === "album" ?
+                      <span className={style.GernericAlbumHeroWrapperInfoType}>{(album as AlbumInterface).release_date && <span>Released on <b>{dayjs((album as AlbumInterface).release_date).format('MMM YYYY')}</b> - </span>}<b>{(album as AlbumInterface).total_tracks} tracks</b></span>
+                    :
+                    <div>
+                      <p className={style.GernericAlbumHeroWrapperInfoDescription}>{(album as PlaylistInterface).description}</p>
+                      <p className={style.GernericAlbumHeroWrapperInfoRelease}>
+                        { (album as PlaylistInterface)?.owner?.display_name ? `Created by ${(album as PlaylistInterface).owner.display_name} – ` : null }
+                        <b>{(album as PlaylistInterface).tracks.total} tracks</b>
+                      </p>
+                    </div>
+                  : null
+                }
+              </Stack>
             </div>
           </div>
           <div className={style.GernericAlbumHeroWrapperControllers}>

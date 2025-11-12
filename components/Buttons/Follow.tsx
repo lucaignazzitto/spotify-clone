@@ -33,7 +33,7 @@ export default function FollowButton ({
   const [loading, setLoading] = useState<boolean>(true)
   const [following, setFollowing] = useState<boolean>(false)
 
-  const checkForFollow = () => {
+  const checkForFollow = useCallback(() => {
     setLoading(true)
     return HttpProvider.get('/api/me/following/contains', {
       params: {
@@ -49,7 +49,7 @@ export default function FollowButton ({
       .finally(() => {
         setLoading(false)
       })
-  }
+  }, [type, ids])
 
 
   const handleClick = (e) => {
@@ -75,7 +75,7 @@ export default function FollowButton ({
 
   useEffect(() => {
     checkForFollow()
-  }, [type, ids])
+  }, [checkForFollow])
 
   return (
     <button type="button" className={`btn btn-small ${className} ${following ? 'btn-success' : 'btn-secondary' }`} onClick={handleClick}>
