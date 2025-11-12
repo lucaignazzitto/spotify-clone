@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useState } from 'react';
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 
-function DevicesButton ({ className = "", color = "" }: { className?: string, color?: string }) {
+function DevicesButton ({ className = "", color = "", iconSize }: { className?: string, color?: string, iconSize?: number }) {
   const { activeDevice, devices, loadDevices } = useSpotifyPlayer()
   const [ loading, setLoading ] = useState<boolean>(false)
   
@@ -62,12 +62,12 @@ function DevicesButton ({ className = "", color = "" }: { className?: string, co
       }>
         <div className='d-none d-lg-block'>
           <button className='btn btn-none hover-anim'>
-            <Icon id="devices" color={color} />
+            <Icon id="devices" color={color} width={iconSize} height={iconSize} />
           </button>
         </div>
       </OverlayTrigger>
       <Link className={`hover-anim ${className} d-lg-none`} href={'/player/devices'}>
-        <Icon id="devices" color={color} />
+        <Icon id="devices" color={color} width={iconSize} height={iconSize} />
       </Link>
     </>
   )

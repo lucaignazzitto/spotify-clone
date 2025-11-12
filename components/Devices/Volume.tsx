@@ -6,12 +6,20 @@ import Icon from "@/components/Image/Icon"
 import style from "./Volume.module.scss"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
 
-export default function Volume({ deviceId, volume_percent = 0, direction = "vertical", className = "" }) {
+interface Props {
+  deviceId?: number | string,
+  volume_percent?: number
+  iconSize?: number
+  direction: "vertical" | "horizontal"
+  className?: string
+}
+
+export default function Volume({ deviceId, volume_percent = 0, direction = "vertical", className = "", iconSize = 20 }) {
   const { activeDevice, handleSync } = useSpotifyPlayer();
 
   const [currentVolume, setCurrentVolume] = useState(volume_percent || activeDevice.volume_percent)
 
-  const handleVolume = (e, forceToValue) => {
+  const handleVolume = (e: any, forceToValue?: number) => {
     e.preventDefault()
     const { value } = e.target
     const valueToSet = forceToValue !== undefined ? forceToValue : value
@@ -57,14 +65,13 @@ export default function Volume({ deviceId, volume_percent = 0, direction = "vert
     <div className={`${style.volumeWrapp} ${className}`}>
       <div className={`${style.volumeWrappContent} ${direction === "horizontal" ? style.volumeWrappContentHorizontal : style.volumeWrappContentVertical}`}>
         <button className="btn btn-none hover-anim" onClick={(e) => handleVolume(e, currentVolume > 0 ? 0 : 100)}>
-          <Icon id={iconByVolume} className={`${style.volumeWrappContentIcon}`} width={20} height={20} />
+          <Icon id={iconByVolume} className={`${style.volumeWrappContentIcon}`} width={iconSize} height={iconSize} />
         </button>
         <input
           type="range"
-          orient={direction}
           name={`volume-${deviceId}`}
           value={currentVolume}
-          onChange={handleVolume}
+          onChange={(e) => handleVolume(e)}
           min={0}
           max={100}
           step={1}

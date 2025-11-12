@@ -85,7 +85,7 @@ export function SpotifyPlayerProvider({ children }) {
         return undefined
       })
   }
-  
+
   const nextSong: SpotifyPlayer['nextSong'] = (deviceId) => {
     return HttpProvider.post('/api/me/player/next', {
       device_id: deviceId
@@ -96,7 +96,7 @@ export function SpotifyPlayerProvider({ children }) {
         return undefined
       })
   }
-  
+
   const prevSong: SpotifyPlayer['prevSong'] = (deviceId) => {
     return HttpProvider.post('/api/me/player/previous', {
       device_id: deviceId
@@ -107,7 +107,7 @@ export function SpotifyPlayerProvider({ children }) {
         return undefined
       })
   }
-  
+
   const addToQueue: SpotifyPlayer['addToQueue'] = (deviceId, trackUri) => {
     return HttpProvider.post('/api/me/player/queue', {
       device_id: deviceId,
@@ -165,7 +165,7 @@ export function SpotifyPlayerProvider({ children }) {
       state
     })
   }
-  
+
   const repeat: SpotifyPlayer['repeat'] = (id = deviceId, state) => {
     return HttpProvider.put('/api/me/player/repeat', {
       device_id: id,

@@ -1,27 +1,12 @@
 import { cookies } from 'next/headers'
 import GenericAlbums from '@/components/Albums/GenericAlbums'
-import style from "./Albumns.module.scss"
 import { AlbumInterface, IncludesGroup } from '@/lib/models/album.inteface'
 import { ArtistInterface } from '@/lib/models/artist.inteface'
 import Link from 'next/link'
+import AlbumTypesPicker from '@/components/Albums/AlbumTypesPicker'
 
 const LIMIT = 15
 const MARKET = 'IT'
-
-const ALBUMNS_GROUP = [
-  {
-    group: 'album',
-    title: 'Albums'
-  },
-  {
-    group: 'single',
-    title: 'Single and EP'
-  },
-  {
-    group: 'compilation',
-    title: 'Compilations'
-  }
-]
 
 export async function loadAlbum({ artistId, limit = LIMIT, include_groups }: { artistId: ArtistInterface['id'], limit?: string | number, include_groups?: IncludesGroup }) {
   const params = new URLSearchParams();
@@ -53,20 +38,16 @@ export default async function Albums({ artistId, group = "album" }: { artistId: 
   const albumsAppears = await loadAlbum({ artistId, include_groups: 'appears_on' }) as AlbumInterface[]
 
   return (
-    <div className={style.albumsList}>
+    <div>
       <div>
         <div className='d-flex align-items-center justify-content-between'>
           <span className={`section-title`}>Discography</span>
           <Link href={`/artists/${artistId}/album/${group}`} className='fs-14 text-muted'>View all</Link>
         </div>
         <div className='d-flex align-items-center gap-3 mt-3'>
-          {
-            ALBUMNS_GROUP.map((type) => (
-              <Link href={{ query: { group: type.group } }} scroll={false} key={type.group} className={`btn btn-small btn-rounded ${group === type.group ? 'btn-light' : 'btn-dark'} fs-12`}>{type.title}</Link>
-            ))
-          }
+          <AlbumTypesPicker activeGroup={group} />
         </div>
-        <div className={style.albumsListWrapp}>
+        <div className={"w-100 mt-4"}>
           <GenericAlbums albums={albums} />
         </div>
       </div>
@@ -75,7 +56,7 @@ export default async function Albums({ artistId, group = "album" }: { artistId: 
           <span className={`section-title`}>Discovered also in</span>
           <Link href={`/artists/${artistId}/album/appears_on`} className='fs-14 text-muted'>View all</Link>
         </div>
-        <div className={style.albumsListWrapp}>
+        <div className={"w-100 mt-4"}>
           <GenericAlbums albums={albumsAppears} />
         </div>
       </div>

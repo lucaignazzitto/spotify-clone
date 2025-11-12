@@ -1,13 +1,14 @@
 import { cookies } from 'next/headers';
 import { cache, ReactNode } from 'react';
-import Menu from '@/components/Sidebar/Menu'
-import HeaderNavigation from '@/components/Header/Navigation'
-import Player from '@/components/Me/Player/Player';
 import { SpotifyPlayerProvider } from '@/contexts/SpotifyPlayerContext';
-import '@/styles/global.scss'
 import { Metadata } from 'next';
 import { UserInterface } from '@/lib/models/user.interface';
 import { APP_NAME } from '../layout';
+import Menu from '@/components/Sidebar/Menu'
+import HeaderNavigation from '@/components/Header/Navigation'
+import Player from '@/components/Me/Player/Player';
+
+import '@/styles/global.scss'
 
 const loadMe = cache(async () => {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me`, {

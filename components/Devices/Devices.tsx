@@ -29,13 +29,7 @@ interface DeviceModalProps extends React.ComponentProps<typeof Modal> { }
 function DeviceModal({ onDeviceSelected = () => {}, ...props }: DeviceModalProps) {
   const { devices, loadDevices } = useSpotifyPlayer()
 
-  const getDevices = useCallback(() => {
-    return props?.show && loadDevices()
-  }, [props?.show])
-
-  useEffect(() => {
-    getDevices()
-  }, [getDevices])
+  if (props?.show) loadDevices()
 
   return (
     <Modal centered {...props}>

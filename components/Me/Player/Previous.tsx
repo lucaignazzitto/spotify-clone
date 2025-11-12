@@ -8,12 +8,13 @@ import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext";
 
 interface PrevSongProps extends ButtonProps {
   className?: string,
+  iconSize?: number,
 }
 
 /**
  * go to previous track
  */
-function PreviousButton({ className = "" }: PrevSongProps) {
+function PreviousButton({ className = "", iconSize }: PrevSongProps) {
   const { deviceId, prevSong } = useSpotifyPlayer()
   const [loading, setLoading] = useState(false)
 
@@ -33,7 +34,7 @@ function PreviousButton({ className = "" }: PrevSongProps) {
       aria-label="Previous song"
       text={
         loading ? <Spinner show={true} />
-          : <Icon id='track-prev'></Icon>
+          : <Icon id='track-prev' width={iconSize} height={iconSize}></Icon>
       }
       onClick={handleClick}
     />

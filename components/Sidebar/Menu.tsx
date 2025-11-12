@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { UserInterface } from "@/lib/models/user.interface"
 
 export default function Menu({ user, className = "" }: { user: UserInterface, className?: string }) {
+
   const pathname = usePathname()
 
   const linkLegend = [
@@ -21,14 +22,14 @@ export default function Menu({ user, className = "" }: { user: UserInterface, cl
       href: `/profile/${user.id}/saved`,
     },
     {
-      name: 'releases',
-      iconId: 'bell',
-      href: `/releases`,
-    },
-    {
       name: 'search',
       iconId: 'search',
       href: `/search`,
+    },
+    {
+      name: 'releases',
+      iconId: 'bell',
+      href: `/releases`,
     },
     {
       name: 'logout',

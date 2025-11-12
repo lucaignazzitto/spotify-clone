@@ -25,7 +25,7 @@ export default function Artists ({
 }: Props) {
   return (
     <div className={className}>
-      { title ? <div>{title}</div> : null }
+      { title ? <div className='mb-3 mb-lg-4'>{title}</div> : null }
       {
         isLoading ? <ArtistLoader itemsPerRow={1} direction={direction} />
         :

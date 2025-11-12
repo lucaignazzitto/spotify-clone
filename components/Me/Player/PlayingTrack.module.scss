@@ -90,3 +90,42 @@
     font-size: 12px;
   }
 }
+
+.PlayingThumbnail {
+  width: 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    box-shadow: inset 0 0 20px black;
+  }
+
+  &Media {
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  &Infos {
+    margin-top: 6px;
+    color: map-get($colors, $key: "white");
+    overflow: auto;
+
+    &Artists {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 6px;
+      overflow: auto;
+      width: 100%;
+
+
+      &Artist {
+        white-space: nowrap;
+      }
+    }
+  }
+}

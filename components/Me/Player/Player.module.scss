@@ -18,6 +18,16 @@
   @include media-breakpoint-up(lg) {
     height: 90px;
     padding: 10px 30px;
+
+    &Hidden {
+      opacity: 0;
+      transform: translateY(200px);
+    }
+
+    &Shown {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @include media-breakpoint-down (lg) {
@@ -28,6 +38,7 @@
 
   &HasListening {
     height: 80px;
+
     @include media-breakpoint-up(lg) {
       height: 105px;
       padding: 8px 30px;
@@ -37,6 +48,7 @@
   &HasPlayer {
     bottom: 20px;
     opacity: 1;
+
     @include media-breakpoint-down (lg) {
       bottom: inherit;
       top: 20px;

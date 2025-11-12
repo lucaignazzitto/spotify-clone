@@ -33,9 +33,7 @@ function PlayingTrack ({ track, showLike = true, isLoading = false, className = 
               : null
             }
           </div>
-          <Link href={{
-            pathname: `/albums/${track.album.id}`
-          }} className={`${style.PlayingTrackWrappInnerTitle} truncate-2`}>
+          <Link href={`/albums/${track.album.id}`} className={`${style.PlayingTrackWrappInnerTitle} text-truncate`}>
             <span>
               {track.explicit ? <span className="explicit me-2">E </span> : null }
               {track.name}
@@ -57,7 +55,7 @@ function PlayingTrack ({ track, showLike = true, isLoading = false, className = 
     : <span className={`${style.PlayingTrackNoTrack}`}>
         {
           isLoading ?
-          <div className='d-flex align-items-center'>
+          <div className='flex items-center'>
             <Spinner width={20} height={20} show={isLoading} className='me-2' />
             <span><b>Loading player</b></span>
           </div>

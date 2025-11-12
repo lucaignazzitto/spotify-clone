@@ -21,7 +21,7 @@ import style from "./Player.module.scss"
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 
 function Player() {
-  const { player, track, activeDevice, isPlaying } = useSpotifyPlayer();
+  const { player, track, activeDevice } = useSpotifyPlayer();
   const [showRecap, setShowRecap] = useState(false)
   const device = activeDevice
   const pathname = usePathname()

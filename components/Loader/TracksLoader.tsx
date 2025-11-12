@@ -16,7 +16,7 @@ export default function TracksLoader ({ times = 4, direction = "horizontal", tit
   return (
     <div className={className}>
       { title ? <span className={`section-title`}>{title}</span> : null }
-      <Row className={`${title ? 'mt-5' : ''}`}>
+      <Row className={`${title ? 'mt-3 mt-lg-4' : ''}`}>
         {
           Array.from(Array(times).keys()).map((t, index) => (
             <Col

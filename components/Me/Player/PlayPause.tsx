@@ -7,6 +7,7 @@ import { ButtonProps } from "react-bootstrap"
 
 interface PlayPauseProps extends Omit<ButtonProps, 'size'> {
   deviceId?: number | string,
+  iconSize?: number,
   parentUri?: string,
   element: any, //@todo apply correct type
   className?: string,
@@ -19,6 +20,7 @@ function PlayPause({
   element,
   parentUri,
   className = "",
+  iconSize,
   size = "normal",
   animate = true,
   disabled = false,
@@ -37,9 +39,7 @@ function PlayPause({
     }
   }, [player, element])
 
-  const isPlaying = useMemo(() => {
-    return spotifyIsPlaying && isActive
-  }, [player])
+  const isPlaying = spotifyIsPlaying && isActive
 
   /**
    * prepare payload to start or resume playback
@@ -101,7 +101,7 @@ function PlayPause({
     <Button
       className={`btn-none btn-play ${animate ? 'hover-anim' : ''} ${className} btn-play-${size} ${isPlaying ? 'is-playing' : ''}`}
       disabled={disabled}
-      text={<Icon id={ isPlaying ? 'track-play' : 'track-pause'}></Icon>}
+      text={<Icon id={ isPlaying ? 'track-play' : 'track-pause'} width={iconSize} height={iconSize}></Icon>}
       onClick={handleClick}
       {...props}
     />

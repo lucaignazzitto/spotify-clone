@@ -44,7 +44,7 @@ export default function Tracks({
   return (
     <div className={`tracks ${className}`}>
       {title ? <div>{title}</div> : null}
-      <div className={`${title ? 'mt-5' : ''}`}>
+      <div className={`${title ? 'mt-3 mt-lg-4' : ''}`}>
         {
           isLoading ? <TracksLoader direction={"vertical"} />
             :
