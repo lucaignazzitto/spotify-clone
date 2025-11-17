@@ -36,14 +36,15 @@ export default function LikeButton({
   const [loading, setLoading] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>(false)
 
-  const checkForLike = useCallback(() => {
+  const checkForLike = useCallback((controller) => {
     const url = type === 'track' ? '/api/me/tracks/contains' : '/api/me/albums/contains'
     return HttpProvider.get(url, {
       params: {
         ids
-      }
+      },
+      signal: controller?.signal,
     })
-      .then((res: { data: boolean[]}) => {
+      .then((res: { data: boolean[] }) => {
         const [liked = false] = res?.data || [false]
         setIsLiked(liked)
         return res
@@ -81,7 +82,13 @@ export default function LikeButton({
 
 
   useEffect(() => {
-    checkForLike()
+    const controller = new AbortController();
+    checkForLike(controller)
+    return () => {
+      if (controller) {
+        controller.abort();
+      }
+    };
   }, [checkForLike])
 
   return (

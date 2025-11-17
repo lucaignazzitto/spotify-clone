@@ -8,6 +8,7 @@ import Track from '@/components/Tracks/Track'
 import { TrackInterface } from '@/lib/models/track.interface'
 import { cache } from 'react'
 import { Metadata } from 'next'
+import Tracks from '@/components/Tracks/Tracks'
 
 const loadPlaylist = cache(async (id) => {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me/playlists/${id}?market=IT`, {
@@ -46,20 +47,15 @@ export default async function Playlist({ params }: { params: Promise<{ id: strin
       <BackgroundHandler src={pageBg} />
       <GernericAlbumHero album={playlist} type={playlist.type} />
       <div className='mt-5'>
-        {
-          playlist?.tracks?.items?.map(({ track }: { track: TrackInterface }, index: number) => (
-            <Track
-              key={`${index}-${track.id}`}
-              track={track}
-              from={"playlist"}
-              parentUri={playlist.uri}
-              playlistId={playlist.id}
-              showImage={true}
-              showOptions={true}
-              className={"mt-4 mb-2"}
-            />
-          ))
-        }
+        <Tracks
+          tracks={playlist?.tracks?.items.map(t => t.track)}
+          from={"playlist"}
+          parentUri={playlist.uri}
+          playlistId={playlist.id}
+          showImage={true}
+          showOptions={true}
+          className={"mt-4 mb-2"}
+        />
       </div>
     </Container>
   )

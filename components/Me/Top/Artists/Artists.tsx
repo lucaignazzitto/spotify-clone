@@ -5,6 +5,7 @@ import style from "./Artists.module.scss"
 import { ArtistInterface } from '@/lib/models/artist.inteface'
 import { Stack } from 'react-bootstrap'
 import UrlPicker from '@/components/Picker/UrlPicker'
+import { motion } from 'framer-motion'
 import { TOP_TERMS } from '../Tracks/Tracks'
 import { useSearchParams } from 'next/navigation'
 
@@ -16,7 +17,6 @@ export default function MyTopArtist({ artists, className = "", urlKey = "artists
   const searchParams = useSearchParams()
   const activeTerm = searchParams.get(urlKey) || "medium_term"
 
-
   return (
     <div className={`${style.TopArtistsList} ${className}`}>
       <Stack direction="vertical" className="flex-md-row align-md-items-center justify-content-md-between" gap={3}>
@@ -26,13 +26,34 @@ export default function MyTopArtist({ artists, className = "", urlKey = "artists
         </div>
       </Stack>
       <div className={`mt-4`}>
-        <GenericSlider>
-          {
-            artists.map((artist, index) => (
-              <Artist artist={artist} key={index} />
-            ))
-          }
-        </GenericSlider>
+        <motion.div
+          key={activeTerm}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: .05
+              }
+            }
+          }}
+        >
+          <GenericSlider>
+            {
+              artists.map((artist, index) => (
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                >
+                  <Artist artist={artist} />
+                </motion.div>
+              ))
+            }
+          </GenericSlider>
+        </motion.div>
       </div>
     </div>
   )

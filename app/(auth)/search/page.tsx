@@ -81,7 +81,7 @@ export default async function SearchPage({
           <Col xs={12}>
             {
               keyword && keyword.length > 0 ?
-                <SearchList results={results} />
+                <SearchList results={results} key={keyword} />
                 : <Categories categories={categories} notFoundMessage={""} />
             }
           </Col>

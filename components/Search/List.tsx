@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion";
 import Tracks from "@/components/Tracks/Tracks"
 import Artists from '@/components/Artists/Artists'
 import GenericAlbums from "@/components/Albums/GenericAlbums"
@@ -5,7 +7,17 @@ import { SearchInterface } from '@/lib/models/search.interface';
 
 export default function SearchList({ results }: { results?: SearchInterface }) {
   return (
-    <div>
+    <motion.div
+      initial="visible"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: .04
+          }
+        }
+      }}
+    >
       <section className={`page-section`}>
         <Tracks tracks={results?.tracks?.items} showImage={true} title={"Songs"} showOptions />
       </section>
@@ -15,6 +27,6 @@ export default function SearchList({ results }: { results?: SearchInterface }) {
       <section className={`page-section`}>
         <GenericAlbums albums={results?.albums?.items} title={"Albums"} useLinkToArtist />
       </section>
-    </div>
+    </motion.div>
   )
 }

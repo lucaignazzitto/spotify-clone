@@ -1,4 +1,5 @@
 import Track from '@/components/Tracks/Track'
+import Tracks from '@/components/Tracks/Tracks'
 import { ArtistInterface } from '@/lib/models/artist.inteface'
 import { TrackInterface } from '@/lib/models/track.interface'
 import { cookies } from 'next/headers'
@@ -26,18 +27,22 @@ async function load (artistId: ArtistInterface['id']) {
   }
 }
 
-export default async function Tracks ({ artistId, title = "Popular songs" }: { artistId: ArtistInterface['id'], title?: string }) {
+export default async function ArtistsTracks ({ artistId, title = "Popular songs" }: { artistId: ArtistInterface['id'], title?: string }) {
   const tracks = await load(artistId) as TrackInterface[]
 
   return (
     <div>
       <span className={`section-title`}>{title}</span>
       <div className="mt-3 mt-lg-4">
-        {
+        <Tracks
+          tracks={tracks}
+          showImage={true} showNumber={true} showAlbum useLoopAsNumber showOptions={true}
+        />
+        {/* {
           tracks.map((track, index) => (
             <Track track={track} parentUri={track.album.uri} key={index} showImage={true} showNumber={true} showAlbum numberLabel={index + 1} showOptions={true} />
           ))
-        }
+        } */}
         {
           tracks.length ? null : <p>No tracks found</p>
         }
