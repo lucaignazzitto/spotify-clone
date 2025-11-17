@@ -6,7 +6,7 @@ import { TrackInterface } from "./track.interface"
 export interface PlayRequestParams {
   context_uri: string,
   offset: {
-      position: number
+    position: number
   },
   position_ms: number
 }
@@ -42,4 +42,15 @@ export interface PlayerInterface {
   item: TrackInterface | EpisodeInterface,
   currently_playing_type: string,
   actions: PlayerActions
+}
+
+export interface PlayHistoryInterface {
+  track: TrackInterface
+  played_at: string
+  context: {
+    type: string,
+    external_urls: External_Urls,
+    href: string,
+    uri: string
+  }
 }

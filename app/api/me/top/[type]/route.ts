@@ -9,6 +9,10 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
 
   const { searchParams } = new URL(request.url)
+  // Over what time frame the affinities are computed.
+  // Valid values: long_term (calculated from ~1 year of data and including all new data as it becomes available),
+  // medium_term (approximately last 6 months),
+  // short_term (approximately last 4 weeks). Default: medium_term
   const timeRange = searchParams.get('time_range') || 'medium_term' // medium_term
   const limit = searchParams.get('limit') || 4
   const offset = searchParams.get('offset') || 0

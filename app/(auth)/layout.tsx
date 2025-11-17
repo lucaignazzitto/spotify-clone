@@ -7,7 +7,6 @@ import { APP_NAME } from '../layout';
 import Menu from '@/components/Sidebar/Menu'
 import HeaderNavigation from '@/components/Header/Navigation'
 import Player from '@/components/Me/Player/Player';
-
 import '@/styles/global.scss'
 
 const loadMe = cache(async () => {
@@ -34,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const user = await loadMe() as UserInterface
   return {
     title: {
-      default: user.display_name,
+      default: user?.display_name || '',
       template: `%s | ${APP_NAME}`,
     },
   }

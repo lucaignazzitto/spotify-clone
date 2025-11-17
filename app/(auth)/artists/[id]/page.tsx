@@ -15,6 +15,9 @@ import { IncludesGroup } from '@/lib/models/album.inteface'
 import TracksLoader from '@/components/Loader/TracksLoader'
 import Tracks from './Tracks/Tracks'
 import Hero from '@/components/Artists/Hero/Hero'
+import GenericArtistHero from '@/components/Artists/Hero/GenericHero'
+import { formatNumber } from '@/utils/helpers'
+import FollowButton from '@/components/Buttons/Follow'
 
 const market = 'IT'
 

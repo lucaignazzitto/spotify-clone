@@ -1,6 +1,12 @@
 import { External_Urls, Image, Owner } from "./common.interface"
 import { TrackInterface } from "./track.interface"
 
+export interface CreatePlaylistInterface {
+  name: string
+  description: string
+  public: boolean
+}
+
 export interface PlaylistInterface {
   collaborative: boolean,
   description: string,

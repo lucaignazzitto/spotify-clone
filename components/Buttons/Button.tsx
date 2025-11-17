@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes, ReactNode } from "react"
+import { Button as BootButton, ButtonProps } from 'react-bootstrap'
 import style from "./Button.module.scss"
 
-interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> {
+interface AppButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className">, ButtonProps {
   className?: string
   isLoading?: boolean
   loadingValue?: string
@@ -19,20 +20,20 @@ export default function Button({
   icon = null,
   text = null,
   ...props
-}: ButtonProps) {
+}: AppButtonProps) {
   return (
-    <button type={type} className={`btn ${className}`} {...props}>
+    <BootButton type={type} variant="light" className={`btn ${className}`} {...props}>
       <div className={`${style.buttonContent} ${icon ? style.buttonContentWithIcon : ''} ${isLoading ? style.buttonContentIsLoading : ''}`}>
         {
           icon && <div className={style.buttonContentIcon}>{icon}</div>
         }
         {
-          text && <div className={style.buttonContentText}>{text}</div>
+          text && <div className={style.buttonContentText} style={{ opacity: isLoading ? 0 : 1 }}>{text}</div>
         }
         {
           isLoading && <div className={style.buttonContentLoader}>{loadingValue}</div>
         }
       </div>
-    </button>
+    </BootButton>
   )
 }

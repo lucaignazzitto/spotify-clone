@@ -1,43 +1,37 @@
-import { cookies } from 'next/headers'
+"use client"
 import GenericSlider from '@/components/Slider/GenericSlider'
 import Artist from '@/components/Artists/Artist'
 import style from "./Artists.module.scss"
 import { ArtistInterface } from '@/lib/models/artist.inteface'
+import { Stack } from 'react-bootstrap'
+import UrlPicker from '@/components/Picker/UrlPicker'
+import { TOP_TERMS } from '../Tracks/Tracks'
+import { useSearchParams } from 'next/navigation'
 
-const limit = 6
-async function load() {
-  const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me/top/artists?limit=${limit}`, {
-    headers: { Cookie: (await cookies()).toString() },
-    next: {
-      revalidate: 3600,
-      tags: ['top-artist']
-    }
-  })
-   
-  if (response.ok) {
-    return response.json()
-      .then((res) => {
-        const { items = [] } = res
-        return items
-      })
-  } else {
-    return []
-  }
-}
+export default function MyTopArtist({ artists, className = "", urlKey = "artists_time_range" }: {
+  artists: ArtistInterface[],
+  className?: string
+  urlKey?: string
+}) {
+  const searchParams = useSearchParams()
+  const activeTerm = searchParams.get(urlKey) || "medium_term"
 
-export default async function MyTopArtist ({ className = "" }) {
-  const artists = await load() as ArtistInterface[]
 
   return (
     <div className={`${style.TopArtistsList} ${className}`}>
-      <span className={`section-title`}>My top artists</span>
-      <div className={`mt-3 mt-lg-4`}>
+      <Stack direction="vertical" className="flex-md-row align-md-items-center justify-content-md-between" gap={3}>
+        <span className={`section-title`}>My top artists</span>
+        <div className='d-flex align-items-center gap-3'>
+          <UrlPicker options={TOP_TERMS} urlKey={urlKey} activeKey={activeTerm} className='py-1' />
+        </div>
+      </Stack>
+      <div className={`mt-4`}>
         <GenericSlider>
-        {
-          artists.map((artist, index) => (
-            <Artist artist={artist} key={index} />
-          ))
-        }
+          {
+            artists.map((artist, index) => (
+              <Artist artist={artist} key={index} />
+            ))
+          }
         </GenericSlider>
       </div>
     </div>

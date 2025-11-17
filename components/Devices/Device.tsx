@@ -1,6 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
-import { observer } from "mobx-react-lite"
+import { useState } from "react"
 import Spinner from "@/components/Loader/Spinner"
 import Icon from "@/components/Image/Icon"
 import Volume from "./Volume"
@@ -65,4 +64,4 @@ function Device({ device, showVolume = true, className = "", onDeviceSelected = 
   )
 }
 
-export default observer(Device)
+export default Device

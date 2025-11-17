@@ -1,7 +1,5 @@
 'use client'
-import { observer } from "mobx-react-lite"
 import { useState } from "react"
-import PlayerStore from "@/stores/PlayerStore"
 import Spinner from "@/components/Loader/Spinner"
 import Icon from '@/components/Image/Icon'
 import Button from "@/components/Buttons/Button"
@@ -63,4 +61,4 @@ function RepeatButton({ className = "", iconSize, ...props }: Props) {
   )
 }
 
-export default observer(RepeatButton)
+export default RepeatButton

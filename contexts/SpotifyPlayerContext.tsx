@@ -1,5 +1,7 @@
 "use client"
 import Devices from "@/components/Devices/Devices";
+import PlaylistList from "@/components/Playlists/Track/List";
+import SliderDrawer from "@/components/SliderDrawer/SliderDrawer";
 import { DeviceInterface } from "@/lib/models/devices.interface";
 import { PlayerInterface, PlayRequestParams } from "@/lib/models/player.interface";
 import { TrackInterface } from "@/lib/models/track.interface";
@@ -14,12 +16,13 @@ interface SpotifyPlayer {
   track: TrackInterface,
   changingTrack: boolean,
   isPlaying: boolean,
+  setOpenDevicePicker: Dispatch<SetStateAction<boolean>>,
+  setShowModalPlaylists: Dispatch<SetStateAction<boolean>>,
   transferPlayback: (deviceId: DeviceInterface['id'], play?: boolean) => Promise<void>,
-  nextSong: (deviceId: DeviceInterface['id']) => Promise<void>,
-  prevSong: (deviceId: DeviceInterface['id']) => Promise<void>,
+  nextSong: (deviceId: DeviceInterface['id']) => Promise<PlayerInterface>,
+  prevSong: (deviceId: DeviceInterface['id']) => Promise<PlayerInterface>,
   repeat: (deviceId: DeviceInterface['id'], state: string) => Promise<void>,
   addToQueue: (deviceId: DeviceInterface['id'], trackUri: string) => Promise<void>,
-  setOpenDevicePicker: Dispatch<SetStateAction<boolean>>,
   handleSync: (toggle: boolean) => void,
   loadPlayer: (market?: string) => Promise<PlayerInterface>,
   loadDevices: () => Promise<DeviceInterface[]>,
@@ -40,6 +43,7 @@ export function SpotifyPlayerProvider({ children }) {
   const [deviceId, setDeviceId] = useState<DeviceInterface['id']>(null);
   const [track, setTrack] = useState<TrackInterface>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [showModalPlaylists, setShowModalPlaylists] = useState<boolean>(false)
   const playerUpdater = useRef<any>(null)
 
   const initSync = () => {
@@ -121,10 +125,9 @@ export function SpotifyPlayerProvider({ children }) {
     setIsPlaying(true)
     handleSync(false)
     return HttpProvider.put(`/api/me/player/play?device_id=${deviceId}`, params)
-      .then(async (res) => {
+      .then(async () => {
         // reload player
-        await loadPlayer()
-        return res
+        return await loadPlayer()
       })
       .catch(err => {
         setIsPlaying(oldStatus)
@@ -144,10 +147,9 @@ export function SpotifyPlayerProvider({ children }) {
     return HttpProvider.put(`/api/me/player/pause`, {
       device_id: deviceId
     })
-      .then(async (res) => {
+      .then(async () => {
         // reload player
-        await loadPlayer()
-        return res
+        return await loadPlayer()
       })
       .catch(err => {
         setIsPlaying(oldStatus)
@@ -209,11 +211,12 @@ export function SpotifyPlayerProvider({ children }) {
       track,
       isPlaying,
       changingTrack,
+      setShowModalPlaylists,
+      setOpenDevicePicker,
       repeat,
       addToQueue,
       nextSong,
       prevSong,
-      setOpenDevicePicker,
       transferPlayback,
       handleSync,
       loadPlayer,

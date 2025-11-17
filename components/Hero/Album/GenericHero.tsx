@@ -38,7 +38,7 @@ export default function GenericAlbumHero ({ album, artists = [], type = "album",
               </div> : null
             }
             <div className={style.GernericAlbumHeroWrapperInfo}>
-              <Stack direction="vertical" gap={{ xs: 2, lg: 3 }}>
+              <Stack direction="vertical" className='justify-content-center' gap={{ xs: 2, lg: 3 }}>
                 <h1 className={style.GernericAlbumHeroWrapperInfoTitle}>{album.name}</h1>
                 {
                   artists.length > 0 && 

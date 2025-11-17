@@ -1,9 +1,7 @@
 'use client'
-import { observer } from "mobx-react-lite"
 import { useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import Spinner from "@/components/Loader/Spinner"
-import PlayerStore from "@/stores/PlayerStore"
 import Icon from '@/components/Image/Icon'
 import Button from "@/components/Buttons/Button"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
@@ -49,4 +47,4 @@ function ShuffleButton({ className = "btn btn-none", iconSize }: { className?: s
   )
 }
 
-export default observer(ShuffleButton)
+export default ShuffleButton

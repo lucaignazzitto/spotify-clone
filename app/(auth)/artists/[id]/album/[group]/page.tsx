@@ -26,7 +26,7 @@ export default async function page({ params }: { params: Promise<{ id: ArtistInt
     <div>
       <h3 className='mb-3'>{artist?.name}</h3>
       <Stack direction="horizontal" gap={2}>
-        <AlbumTypesPicker activeGroup={group} redirectPath={(group) => `/artists/${id}/album/${group}`} />
+        <AlbumTypesPicker activeGroup={group} redirectPath={(group) => `/artists/${id}/album/${group}`} replace={true} />
       </Stack>
       <Row className="mt-4 gy-3">
         {

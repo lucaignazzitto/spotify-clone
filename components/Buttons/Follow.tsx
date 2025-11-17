@@ -78,7 +78,7 @@ export default function FollowButton ({
   }, [checkForFollow])
 
   return (
-    <button type="button" className={`btn btn-small ${className} ${following ? 'btn-success' : 'btn-secondary' }`} onClick={handleClick}>
+    <button type="button" className={`btn btn-small btn-success ${className}`} onClick={handleClick}>
       <div className={`${style.buttonContent} ${icon ? style.buttonContentWithIcon : ''} ${isLoading || loading ? style.buttonContentIsLoading : ''}`}>
         <div className={style.buttonContentText}>{ following ? 'Following' : 'Follow' }</div>
         {

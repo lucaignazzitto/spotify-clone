@@ -160,8 +160,8 @@
       position: relative;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr auto auto;
-      column-gap: 20px;
+      grid-template-columns: 1fr 20px 40px;
+      column-gap: 14px;
       align-items: center;
       z-index: 2;
       border-radius: 8px;

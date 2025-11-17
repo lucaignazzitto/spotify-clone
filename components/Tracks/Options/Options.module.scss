@@ -9,12 +9,14 @@
     &Body {
       &Content {
         position: relative;
+
         &Loader {
           top: 30px;
           margin: 0 auto;
         }
         
         &ListTop {
+          overflow: unset !important;
           margin-bottom: 10px !important;
           border-bottom: 1px solid rgba(map-get($colors, $key: "white"), 0.2);
           li {

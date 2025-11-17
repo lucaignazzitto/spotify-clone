@@ -48,11 +48,11 @@ function DevicesButton ({ className = "", color = "", iconSize }: { className?: 
             <p className='mt-1 mb-0 fs-12 cl-grey'>or chooce another device</p>
           </Popover.Header>
           <Popover.Body>
-            <ul className="nav">
+            <ul className="nav gap-2">
               {
                 devices.map((device, index) => (
-                  <li key={index}>
-                    <Device device={device} showVolume={false} className='no-style' />
+                  <li key={index} className='w-100'>
+                    <Device device={device} showVolume={false} className='mb-0' />
                   </li>
                 ))
               }

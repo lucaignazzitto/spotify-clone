@@ -4,12 +4,14 @@ import { TrackInterface } from '@/lib/models/track.interface'
 import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext'
 import { useEffect } from 'react'
 import { revalidateByPath } from '@/app/actions/revalidate'
+import { Stack } from 'react-bootstrap'
+import Link from 'next/link'
 
 export default function QueueList({ currently_playing, queue = [] }: { currently_playing?: TrackInterface, queue: TrackInterface[] }) {
   const { track, changingTrack } = useSpotifyPlayer()
 
   const revalidate = async () => {
-    await revalidateByPath('/queue');
+    await revalidateByPath('/player/queue');
   }
 
   useEffect(() => {
@@ -18,8 +20,11 @@ export default function QueueList({ currently_playing, queue = [] }: { currently
 
   return (
     <div>
-      <h1 className="page-title">Queue</h1>
-      <section className={`page-section`}>
+      <Stack direction="horizontal" gap={4}>
+        <h1 className="page-title">Queue</h1>
+        <Link href={'/player/recently'} className='text-muted text-underline fs-14'>Recently</Link>
+      </Stack>
+      <section className={`page-section pb-0`}>
         <span className={`font-medium text-gray-300`}>Now listening</span>
         <div className={`mt-4`}>
           <Track track={currently_playing} showImage={true} />
