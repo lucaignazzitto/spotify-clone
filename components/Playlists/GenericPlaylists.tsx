@@ -1,3 +1,5 @@
+"use client"
+import { motion } from 'framer-motion'
 import Playlist from '@/components/Playlists/Playlist'
 import GenericSlider from '@/components/Slider/GenericSlider'
 import style from "@/components/Playlists/GenericPlaylist.module.scss"
@@ -19,7 +21,18 @@ export default function GenericPlaylists({
 }: Props) {
 
   return (
-    <div className={`${style.PlaylistWrapp} ${className}`}>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      className={`${style.PlaylistWrapp} ${className}`}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: .05
+          }
+        }
+      }}
+    >
       {title ? <div>{title}</div> : null}
       <div className={`${title ? 'mt-3' : ''}`}>
         {
@@ -27,13 +40,21 @@ export default function GenericPlaylists({
             <GenericSlider slidesPerView={itemsPerRow}>
               {
                 playlists.map((playlist, index) => (
-                  <Playlist playlist={playlist} key={index} />
+                  <motion.div
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    <Playlist playlist={playlist} />
+                  </motion.div>
                 ))
               }
             </GenericSlider>
             : <p>No Playlists found</p>
         }
       </div>
-    </div>
+    </motion.div>
   )
 }

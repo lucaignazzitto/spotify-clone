@@ -2,13 +2,14 @@ import { cookies } from 'next/headers'
 import pageBg from "@/public/images/bubble-3.jpg"
 import BackgroundHandler from '@/components/Backound/Handler'
 import RecentlyList from '@/components/Recents/List'
+import { Metadata } from 'next'
 
 const LIMIT = 20
 
 async function loadRecents() {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me/player/recently?limit=${LIMIT}`, {
     headers: { Cookie: (await cookies()).toString() },
-    cache: 'no-store',
+    cache: 'no-store'
   })
 
   if (response.ok) {
@@ -19,6 +20,12 @@ async function loadRecents() {
       })
   } else {
     return []
+  }
+}
+
+export function generateMetadata(): Metadata {
+  return {
+    title: "Recently played"
   }
 }
 

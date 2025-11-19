@@ -3,11 +3,15 @@ import pageBg from "@/public/images/bubble-3.jpg"
 import BackgroundHandler from '@/components/Backound/Handler'
 import { TrackInterface } from '@/lib/models/track.interface'
 import QueueList from '@/components/Queue/List'
+import { Metadata } from 'next'
 
 async function loadQueue() {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me/player/queue`, {
     headers: { Cookie: (await cookies()).toString() },
     cache: 'no-store',
+    next: {
+      tags: ['queue']
+    }
   })
    
   if (response.ok) {
@@ -17,6 +21,12 @@ async function loadQueue() {
       })
   } else {
     return []
+  }
+}
+
+export function generateMetadata(): Metadata {
+  return {
+    title: "Queue"
   }
 }
 

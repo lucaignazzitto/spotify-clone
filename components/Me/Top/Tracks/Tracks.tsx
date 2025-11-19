@@ -2,6 +2,7 @@
 import Track from '@/components/Tracks/Track'
 import { TrackInterface } from '@/lib/models/track.interface'
 import style from "./Tracks.module.scss"
+import { motion } from 'framer-motion'
 import { Col, Row, Stack } from 'react-bootstrap'
 import UrlPicker from '@/components/Picker/UrlPicker'
 import { useSearchParams } from 'next/navigation'
@@ -39,15 +40,35 @@ export default function MyTopTracks({
         </div>
       </Stack>
       <div className={`${style.TopTracksListWrapp} mt-4 mt-lg-4`}>
-        <Row>
-          {
-            tracks.map((track, index) => (
-              <Col md={6} xl={3} key={index}>
-                <Track track={track} parentUri={track.album.uri} showImage={true} className={style.TopTracksListWrappTrack} />
-              </Col>
-            ))
-          }
-        </Row>
+        <motion.div
+          key={activeTerm}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: .05
+              }
+            }
+          }}
+        >
+          <Row>
+            {
+              tracks.map((track, index) => (
+                <Col md={6} xl={3} key={index}>
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    <Track track={track} parentUri={track.album.uri} showImage={true} className={style.TopTracksListWrappTrack} />
+                  </motion.div>
+                </Col>
+              ))
+            }
+          </Row>
+        </motion.div>
       </div>
     </div>
   )

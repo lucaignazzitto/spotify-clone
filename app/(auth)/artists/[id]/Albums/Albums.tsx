@@ -48,7 +48,7 @@ export default async function Albums({ artistId, group = "album" }: { artistId: 
           <AlbumTypesPicker activeGroup={group} />
         </div>
         <div className={"w-100 mt-4"}>
-          <GenericAlbums albums={albums} />
+          <GenericAlbums albums={albums} key={group} />
         </div>
       </div>
       <div className='mt-5 pt-4'>

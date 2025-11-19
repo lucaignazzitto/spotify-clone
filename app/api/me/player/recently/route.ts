@@ -19,10 +19,6 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch recently played')
-    }
-
     const data = await response.json()
     return NextResponse.json(data)
   } catch (error) {

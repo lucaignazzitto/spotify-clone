@@ -1,7 +1,6 @@
 import Link from "next/link"
 import style from "./Me.module.scss"
 import Image from "next/image"
-import { mediaPlaceholder } from "@/utils/helpers"
 import { UserInterface } from "@/lib/models/user.interface"
 
 export default function Me ({ user, className = "" }: { user: UserInterface, className?: string }) {
@@ -15,7 +14,7 @@ export default function Me ({ user, className = "" }: { user: UserInterface, cla
         <div className={style.meWrapp}>
           <Link href={`/profile/${user.id}`} aria-label="Profile">
             <div className={style.meWrappInfo}>
-              <Image src={profileImageUrl?.url} alt={`${user.display_name} profile image`} width={30} height={30} className={style.meWrappInfoImage} placeholder="blur" blurDataURL={mediaPlaceholder} loading="lazy" />
+              <Image src={profileImageUrl?.url} alt={`${user.display_name} profile image`} width={30} height={30} className={style.meWrappInfoImage} />
             </div>
           </Link>
         </div>
