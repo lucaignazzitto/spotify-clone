@@ -9,7 +9,18 @@ export default function Hero({ artist, useImage = true }: { artist: ArtistInterf
   const heroImage = useImage ? artist?.images?.[0] || null : null
 
   return (
-    <div className={style.ArtistHeroWrapper}>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      className={style.ArtistHeroWrapper}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: .04
+          }
+        }
+      }}
+    >
       {
         heroImage && heroImage.url &&
         <motion.div
@@ -24,7 +35,15 @@ export default function Hero({ artist, useImage = true }: { artist: ArtistInterf
         />
       }
       <div>
-        <div className={style.ArtistHeroWrapperFollowers}>{formatNumber(artist?.followers?.total)} Followers</div>
+        <motion.div
+          className={style.ArtistHeroWrapperFollowers}
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            visible: { opacity: 1, y: 0 }
+          }}
+        >
+          {formatNumber(artist?.followers?.total)} Followers
+        </motion.div>
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 10 },
@@ -33,10 +52,16 @@ export default function Hero({ artist, useImage = true }: { artist: ArtistInterf
         >
           <h1 className={style.ArtistHeroWrapperTitle}>{artist?.name}</h1>
         </motion.div>
-        <div className={style.ArtistHeroWrapperFollow}>
+        <motion.div
+          className={style.ArtistHeroWrapperFollow}
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            visible: { opacity: 1, y: 0 }
+          }}
+        >
           <FollowButton type={artist.type} ids={artist.id} />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   )
 }

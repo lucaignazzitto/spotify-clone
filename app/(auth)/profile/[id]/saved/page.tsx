@@ -8,11 +8,11 @@ import { TrackInterface } from "@/lib/models/track.interface"
 import { AlbumInterface } from "@/lib/models/album.inteface"
 import { Metadata } from "next"
 
-const market = 'IT'
-const limit = 20
+const MARKET = 'IT'
+const LIMIT = 20
 
 async function load() {
-  const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me/tracks?market=${market}&limit=${limit}`, {
+  const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/me/tracks?market=${MARKET}&limit=${LIMIT}`, {
     headers: { Cookie: (await cookies()).toString() },
     next: {
       tags: ['saved-tracks']

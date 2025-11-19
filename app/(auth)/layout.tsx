@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function AuthLayout({ children }: { children: ReactNode }) {
   const user = await loadMe()
-
+  console.log(user)
   return (
     <SpotifyPlayerProvider>
       <div className='main-container'>

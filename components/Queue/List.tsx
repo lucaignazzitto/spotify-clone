@@ -1,23 +1,11 @@
 "use client"
 import Track from '@/components/Tracks/Track'
 import { TrackInterface } from '@/lib/models/track.interface'
-import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext'
-import { useEffect } from 'react'
-import { revalidateByPath } from '@/app/actions/revalidate'
 import { Stack } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 export default function QueueList({ currently_playing, queue = [] }: { currently_playing?: TrackInterface, queue: TrackInterface[] }) {
-  const { track, changingTrack } = useSpotifyPlayer()
-
-  const revalidate = async () => {
-    await revalidateByPath('/player/queue');
-  }
-
-  useEffect(() => {
-    revalidate()
-  }, [track?.name, changingTrack])
 
   return (
     <div>

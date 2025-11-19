@@ -2,6 +2,7 @@
 import { ButtonHTMLAttributes, ReactNode, useCallback, useEffect, useState } from "react"
 import HttpProvider from '@/services/HttpProvider'
 import style from "./Button.module.scss"
+import Button from "./Button"
 
 
 interface FollowButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "type"> {
@@ -21,11 +22,11 @@ interface FollowButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>
  * @param {String} ids comma separated id of artist or user
  * @returns {JSX}
  */
-export default function FollowButton ({
+export default function FollowButton({
   type = "artist",
   ids = "",
   className = "",
-  onClick = () => {},
+  onClick = () => { },
   isLoading = false,
   loadingValue = "Loading...",
   icon = false
@@ -42,7 +43,7 @@ export default function FollowButton ({
       }
     })
       .then((res) => {
-        const [ isFollowing ] = res.data
+        const [isFollowing] = res.data
         setFollowing(isFollowing)
         return res
       })
@@ -78,15 +79,13 @@ export default function FollowButton ({
   }, [checkForFollow])
 
   return (
-    <button type="button" className={`btn btn-small btn-success ${className}`} onClick={handleClick}>
-      <div className={`${style.buttonContent} ${icon ? style.buttonContentWithIcon : ''} ${isLoading || loading ? style.buttonContentIsLoading : ''}`}>
-        <div className={style.buttonContentText}>{ following ? 'Following' : 'Follow' }</div>
-        {
-          isLoading || loading ? 
-            <div className={style.buttonContentLoader}>{loadingValue}</div>
-          : null
-        }
-      </div>
-    </button>
+    <Button
+      type="button"
+      variant="primary"
+      className={`btn btn-small ${className}`}
+      onClick={handleClick}
+      isLoading={isLoading || loading}
+      text={following ? 'Following' : 'Follow'}
+    />
   )
 }

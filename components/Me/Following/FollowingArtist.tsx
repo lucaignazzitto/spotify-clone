@@ -5,7 +5,7 @@ import style from "./FollowingArtist.module.scss"
 import { motion } from 'framer-motion'
 import { ArtistInterface } from '@/lib/models/artist.inteface'
 
-export default async function FollowingArtist({ artists, className = "" }: { artists: ArtistInterface[], className?: string }) {
+export default function FollowingArtist({ artists, className = "" }: { artists: ArtistInterface[], className?: string }) {
 
   return (
     <div className={`${style.TopFollowingArtistsList} ${className}`}>

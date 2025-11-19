@@ -49,6 +49,7 @@ export default function LikeButton({
         setIsLiked(liked)
         return res
       })
+      .catch(() => false)
   }, [type, ids])
 
 
@@ -86,7 +87,7 @@ export default function LikeButton({
     checkForLike(controller)
     return () => {
       if (controller) {
-        controller.abort();
+        controller?.abort();
       }
     };
   }, [checkForLike])

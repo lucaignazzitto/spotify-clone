@@ -23,8 +23,8 @@ export default function Artist({ artist, showType = false, imageProps }: Props) 
           <div className={style.ArtistWrappInnerMedia}>
             <Image
               src={image?.url}
-              width={300}
-              height={300}
+              width={400}
+              height={400}
               alt={`Cover photo of ${artist.name}`}
               placeholder="blur"
               blurDataURL={mediaPlaceholder}

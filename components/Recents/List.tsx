@@ -2,25 +2,12 @@
 "use client"
 import { motion } from 'framer-motion'
 import Track from '@/components/Tracks/Track'
-import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext'
-import { useEffect } from 'react'
-import { revalidateByPath } from '@/app/actions/revalidate'
 import { PlayHistoryInterface } from '@/lib/models/player.interface'
 import { timeFromNow } from '@/utils/helpers'
 import { Stack } from 'react-bootstrap'
 import Link from 'next/link'
 
 export default function RecentlyList({ tracks }: { tracks?: PlayHistoryInterface[] }) {
-  const { track, changingTrack } = useSpotifyPlayer()
-
-  const revalidate = async () => {
-    await revalidateByPath('/player/recently');
-  }
-
-  useEffect(() => {
-    revalidate()
-  }, [track?.name, changingTrack])
-
   return (
     <div>
       <Stack direction="horizontal" gap={4}>

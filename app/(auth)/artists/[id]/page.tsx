@@ -15,8 +15,6 @@ import TracksLoader from '@/components/Loader/TracksLoader'
 import Tracks from './Tracks/Tracks'
 import Hero from '@/components/Artists/Hero/Hero'
 
-const market = 'IT'
-
 export const loadArtist = cache(async (artistId: string) => {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/artists/${artistId}`, {
     headers: { Cookie: (await cookies()).toString() as string },
