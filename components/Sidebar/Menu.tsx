@@ -19,7 +19,7 @@ export default function Menu({ user, className = "" }: { user: UserInterface, cl
     {
       name: 'liked',
       iconId: 'heart',
-      href: `/profile/${user.id}/saved`,
+      href: `/profile/${user?.id}/saved`,
     },
     {
       name: 'search',

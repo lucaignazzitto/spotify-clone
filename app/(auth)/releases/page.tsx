@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import pageBg from "@/public/images/bubble-3.jpg"
 import BackgroundHandler from '@/components/Backound/Handler'
 import ReleaseAlbum from '@/components/Release/Album'
+import ReleaseAlbums from '@/components/Release/Albums';
 
 async function getReleases() {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/browse/new-releases`, {
@@ -42,13 +43,14 @@ export default async function page() {
         <h1 className="page-title">News</h1>
         <p>Latest release for following artist, podcast and show</p>
         <div className={`mt-3 mt-lg-4`}>
-          <Row>
+          <ReleaseAlbums albums={albums.items} useType={true} className='gap-4' />
+          {/* <Row>
             { albums.items.map((item) => (
               <Col xs={12} key={item.id} className='mb-4'>
                 <ReleaseAlbum album={item} useType={true} />
               </Col>
             ))}
-          </Row>
+          </Row> */}
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+"use client"
+import { motion } from 'framer-motion'
 import Artist from '@/components/Artists/Artist'
 import GenericSlider from '@/components/Slider/GenericSlider'
 import ArtistLoader from '@/components/Loader/ArtistLoader'
@@ -14,7 +16,7 @@ type Props = {
   isLoading?: boolean
 }
 
-export default function Artists ({
+export default function Artists({
   direction = "vertical",
   itemsPerRow = 4,
   artists = [],
@@ -24,21 +26,42 @@ export default function Artists ({
   isLoading = false
 }: Props) {
   return (
-    <div className={className}>
-      { title ? <div className='mb-3 mb-lg-4'>{title}</div> : null }
+    <motion.div
+      className={className}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: .04
+          }
+        }
+      }}
+    >
+      {title ? <div className='mb-3 mb-lg-4'>{title}</div> : null}
       {
         isLoading ? <ArtistLoader itemsPerRow={1} direction={direction} />
-        :
-        artists && artists.length ?
-          <GenericSlider slidesPerView={itemsPerRow}>
-            {
-              artists.map((artist, index) => (
-                <Artist artist={artist} showType={showType} key={index}/>
-              ))
-            }
-          </GenericSlider>
-        : <p>No artists found</p>
+          :
+          artists && artists.length ?
+            <GenericSlider slidesPerView={itemsPerRow}>
+              {
+                artists.map((artist, index) => (
+                  <motion.div
+                    className='w-full'
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0 },
+                    }}
+                  >
+                    <Artist artist={artist} showType={showType} />
+                  </motion.div>
+                ))
+              }
+            </GenericSlider>
+            : <p>No artists found</p>
       }
-    </div>
+    </motion.div>
+
   )
 }

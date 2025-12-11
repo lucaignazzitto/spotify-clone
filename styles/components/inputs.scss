@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 .form-control {
-  border-radius: 20px;
+  border-radius: 8px;
   color: map-get($colors, $key: "black");
   background-color: map-get($colors, $key: "muted");
   border: none;

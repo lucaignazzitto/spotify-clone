@@ -79,13 +79,13 @@ export default async function Profile({ params }: { params: Promise<{ id: string
               <GenericPlaylists
                 itemsPerRow={5}
                 title={<span className={`section-title`}>Your playlists</span>}
-                playlists={spotify.concat(user)}
+                playlists={user.concat(spotify)}
               />
             </section>
             <section className={`page-section`}>
               <span className={`section-title`}>Saved Albums</span>
               <div className="mt-3">
-                <Albums albums={albums} />
+                <Albums albums={albums} useLinkToArtist />
               </div>
             </section>
           </>

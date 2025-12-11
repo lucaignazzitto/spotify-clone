@@ -1,3 +1,5 @@
+"use client"
+import { motion } from 'framer-motion'
 import Button from '@/components/Buttons/Button'
 import Link from 'next/link'
 import style from './not-found.module.scss'
@@ -6,20 +8,50 @@ import notFound from '@/public/images/404.jpg'
 
 export default function NotFound() {
   return (
-    <div className={style.mainWrapp}>
+    <motion.div
+      className={style.mainWrapp}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: .04
+          }
+        }
+      }}
+    >
+
       <div className={style.mainRound}></div>
       <div className={style.smallRound}></div>
       <h1 className={style.title}>
-        <span>4</span>
-        <div className={style.middleZero}>
-          <Image src={notFound.src} alt="dd" fill style={{ objectFit: 'cover'}} />
-        </div>
-        <span>4</span>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: -20 },
+            visible: { opacity: 1, y: 0 }
+          }}>4</motion.div>
+        <motion.div className={style.middleZero} variants={{
+          hidden: { opacity: 0, scale: 1.5 },
+          visible: { opacity: 1, scale: 1 }
+        }}>
+          <Image src={notFound.src} alt="Not found page" fill style={{ objectFit: 'cover' }} />
+        </motion.div>
+        <motion.span
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}>4</motion.span>
       </h1>
-      <p className={style.desc}>Seems you lost</p>
-      <Link href={'/'}>
-        <Button className='btn btn-primary' text="go back home"></Button>
-      </Link>
-    </div>
+      <motion.div 
+      className='text-center'
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+      }}>
+        <p className={style.desc}>Seems you lost</p>
+        <Link href={'/'}>
+          <Button className='btn btn-primary' variant='primary' text="go back home"></Button>
+        </Link>
+      </motion.div>
+    </motion.div>
   )
 }

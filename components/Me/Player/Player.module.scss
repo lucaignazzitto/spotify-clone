@@ -10,24 +10,12 @@
   background-color: rgba(0, 0, 0, 0.822);
   left: 120px;
   padding: 0 15px;
-  bottom: -100px;
-  opacity: 0;
   border-radius: 14px;
-  transition: all 600ms cubic-bezier(0.7, 0.44, 0.39, 0.99);
+  transition: all 200ms cubic-bezier(0.7, 0.44, 0.39, 0.99);
 
   @include media-breakpoint-up(lg) {
     height: 90px;
     padding: 10px 30px;
-
-    &Hidden {
-      opacity: 0;
-      transform: translateY(200px);
-    }
-
-    &Shown {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @include media-breakpoint-down (lg) {
@@ -47,7 +35,6 @@
 
   &HasPlayer {
     bottom: 20px;
-    opacity: 1;
 
     @include media-breakpoint-down (lg) {
       bottom: inherit;

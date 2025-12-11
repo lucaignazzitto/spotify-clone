@@ -20,7 +20,7 @@ interface Props extends SwiperClass {
 }
 
 const GenericSlider = ({
-  spaceBetween = 30,
+  spaceBetween = 25,
   slidesPerView = 4,
   className = "",
   overflowed = true,
@@ -36,17 +36,17 @@ const GenericSlider = ({
     // when window width is >= 320px
     0: {
       slidesPerView: 2,
-      spaceBetween: 10
+      spaceBetween: 5
     },
     // when window width is >= 480px
     480: {
       slidesPerView: 3,
-      spaceBetween: 15
+      spaceBetween: 10
     },
     // when window width is >= 640px
     640: {
       slidesPerView: 3,
-      spaceBetween: 30
+      spaceBetween: 20
     },
     991: {
       slidesPerView: slidesPerView,

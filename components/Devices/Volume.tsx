@@ -10,14 +10,14 @@ interface Props {
   deviceId?: number | string,
   volume_percent?: number
   iconSize?: number
-  direction: "vertical" | "horizontal"
+  direction?: "vertical" | "horizontal"
   className?: string
 }
 
-export default function Volume({ deviceId, volume_percent = 0, direction = "vertical", className = "", iconSize = 20 }) {
+export default function Volume({ deviceId, volume_percent = 0, direction = "vertical", className = "", iconSize = 20 }: Props) {
   const { activeDevice, handleSync } = useSpotifyPlayer();
 
-  const [currentVolume, setCurrentVolume] = useState(volume_percent || activeDevice.volume_percent)
+  const [currentVolume, setCurrentVolume] = useState<number>(volume_percent || activeDevice.volume_percent)
 
   const handleVolume = (e: any, forceToValue?: number) => {
     e.preventDefault()

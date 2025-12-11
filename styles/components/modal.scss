@@ -10,13 +10,8 @@
 
     .modal-content {
       border-radius: 8px;
-      background-color: map-get($colors, $key: "black");
+      background-color: map-get($colors, $key: "full-black");
       color: map-get($colors, $key: "white");
-      // box-shadow: 0 0 15px 4px map-get($colors, $key: full-black);
-
-      .modal-body {
-        padding: 0;
-      }
     }
   }
 }

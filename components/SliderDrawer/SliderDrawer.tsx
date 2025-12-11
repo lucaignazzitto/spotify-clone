@@ -1,10 +1,9 @@
 // using offcanvas instead
 'use client'
-import { ReactNode, useEffect, useState } from "react"
+import { ReactNode } from "react"
 import Offcanvas, { OffcanvasProps } from 'react-bootstrap/Offcanvas'
-import style from "./SliderDrawer.module.scss"
 
-interface Props extends OffcanvasProps {
+export interface SliderDrawerProps extends OffcanvasProps {
   className?: string
   show?: boolean
   onClose: (e:any) => void
@@ -19,20 +18,14 @@ export default function SliderDrawer ({
   title = "",
   children,
   ...props
-}: Props) {
-
-  const [showDrawer, setShowDrawer] = useState<boolean>(show)
+}: SliderDrawerProps) {
 
   const handleHide = (e) => {
     onClose(e)
   }
 
-  useEffect(() => {
-    setShowDrawer(show)
-  }, [show])
-
   return (
-    <Offcanvas show={showDrawer} placement={placement} className={`${className} ${style.SliderDrawer}`} onHide={handleHide} { ...props }>
+    <Offcanvas show={show} placement={placement} className={`${className}`} onHide={handleHide} { ...props }>
       <Offcanvas.Header closeButton closeVariant="white">
         {title ? <Offcanvas.Title as="span">{title}</Offcanvas.Title> : null }
       </Offcanvas.Header>

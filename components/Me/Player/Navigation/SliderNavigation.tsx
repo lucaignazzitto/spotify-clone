@@ -1,19 +1,17 @@
 'use client'
-import PlayerStore from '@/stores/PlayerStore';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
-import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
+import { useCallback, useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import Spinner from "@/components/Loader/Spinner"
 import ImageFit from "@/components/Image/Fit"
 import { EffectCards } from 'swiper/modules';
 import style from './SliderNavigation.module.scss'
+import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 // Import Swiper styles
 import 'swiper/css';
-import { observer } from 'mobx-react-lite';
 import 'swiper/css/effect-cards';
-import { useSpotifyPlayer } from '@/contexts/SpotifyPlayerContext';
 
 const SliderNavigation = () => {
-  const { player, track, deviceId } = useSpotifyPlayer()
+  const { player, track, deviceId, nextSong, prevSong } = useSpotifyPlayer()
   const [isLoading, setIsLoading] = useState(false)
   const [internallyHandled, setInternallyHandled] = useState(false)
   const [swiperInstance, setSwiperInstance] = useState(null)
@@ -57,7 +55,7 @@ const SliderNavigation = () => {
   const handleNext = (swiper) => {
     setIsLoading(true)
     setInternallyHandled(true)
-    return PlayerStore.next(deviceId)
+    return nextSong(deviceId)
       .then((player) => {
         if (player?.item?.name === track?.name) {
           // the track is the same but user changed slide
@@ -74,7 +72,7 @@ const SliderNavigation = () => {
   const handlePrev = (swiper) => {
     setIsLoading(true)
     setInternallyHandled(true)
-    return PlayerStore.previous(deviceId)
+    return prevSong(deviceId)
       .then((player) => {
         if (player?.item?.name === track?.name) {
           // the track is the same but user changed slide
@@ -130,4 +128,4 @@ const SliderNavigation = () => {
   );
 };
 
-export default observer(SliderNavigation)
+export default SliderNavigation

@@ -28,8 +28,14 @@ interface DeviceModalProps extends React.ComponentProps<typeof Modal> { }
 
 function DeviceModal({ onDeviceSelected = () => {}, ...props }: DeviceModalProps) {
   const { devices, loadDevices } = useSpotifyPlayer()
+  
+  const getDevices = useCallback(() => {
+    return props?.show && loadDevices()
+  }, [props?.show])
 
-  if (props?.show) loadDevices()
+  useEffect(() => {
+    getDevices()
+  }, [getDevices])
 
   return (
     <Modal centered {...props}>
@@ -42,11 +48,11 @@ function DeviceModal({ onDeviceSelected = () => {}, ...props }: DeviceModalProps
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ul className="nav flex-column px-2">
+        <ul className="nav flex-column">
           {
             devices.map((device, index) => (
               <li key={index}>
-                <Device device={device} showVolume={false} className='no-style' onDeviceSelected={onDeviceSelected} />
+                <Device device={device} showVolume={false} className='mb-0' onDeviceSelected={onDeviceSelected} />
               </li>
             ))
           }

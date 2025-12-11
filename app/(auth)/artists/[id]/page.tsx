@@ -7,7 +7,6 @@ import Albums from "@/app/(auth)/artists/[id]/Albums/Albums"
 import ArtistHeroLoader from "@/components/Loader/ArtistHeroLoader"
 import GenericAlbumsLoader from '@/components/Loader/GenericAlbumsLoader'
 // styles
-import style from "./Page.module.scss"
 import { ArtistInterface } from '@/lib/models/artist.inteface'
 import { cookies } from 'next/headers'
 import { Metadata } from 'next'
@@ -15,8 +14,6 @@ import { IncludesGroup } from '@/lib/models/album.inteface'
 import TracksLoader from '@/components/Loader/TracksLoader'
 import Tracks from './Tracks/Tracks'
 import Hero from '@/components/Artists/Hero/Hero'
-
-const market = 'IT'
 
 export const loadArtist = cache(async (artistId: string) => {
   const response = await fetch(`${process.env.NEXT_LOCAL_DOMAIN}api/artists/${artistId}`, {
@@ -62,7 +59,7 @@ export default async function ArtistPage({ params, searchParams }: { params: Pro
           </Suspense>
         </Col>
         <Col lg={6} className='mt-5 mt-lg-0'>
-          <Suspense fallback={<TracksLoader times={5} direction="vertical" title="Popular songs" />}>
+          <Suspense fallback={<TracksLoader times={6} direction="vertical" title="Popular songs" />}>
             <Tracks artistId={artist.id} />
           </Suspense>
         </Col>

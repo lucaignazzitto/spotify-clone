@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers'
 import pageBg from "@/public/images/bubble-4.jpg"
-import PlayerStore from '@/stores/PlayerStore'
 import Devices from "@/components/Devices/Devices"
 import BackgroundHandler from '@/components/Backound/Handler'
 import { DeviceInterface } from '@/lib/models/devices.interface'

@@ -23,7 +23,7 @@ export default function Album({ album, useType = false, useLinkToArtist = false,
       <div className={style.albumWrappInner}>
         <Link href={`/albums/${album.id}`}>
           <div className={style.albumWrappInnerMedia}>
-            <Image src={image?.url} width={600} height={600} placeholder='blur' blurDataURL={mediaPlaceholder} loading="lazy" alt={`${album.name} Album cover `} className='img-fluid' />
+            <Image src={image?.url} width={600} height={600} placeholder='blur' blurDataURL={mediaPlaceholder} loading="lazy" alt={`${album.name} Album cover `} className='img-fluid' style={{ aspectRatio: 1, objectFit: 'cover' }} />
             <PlayPause element={album} animate={false} className={style.albumWrappInnerMediaPlayer} aria-label={`Play album ${album.name}`} />
           </div>
         </Link>

@@ -1,5 +1,4 @@
 'use client'
-import { useState, useEffect } from "react"
 import { millisToMinutesAndSeconds } from '@/utils/helpers'
 import Link from "next/link"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -15,6 +14,7 @@ import { mediaPlaceholder } from "@/utils/helpers"
 import { useSpotifyPlayer } from "@/contexts/SpotifyPlayerContext"
 import LinkToAlbum from "../Artists/LinkToAlbum"
 import Image from "next/image";
+import { ReactNode } from 'react';
 
 interface Props {
   parentUri?: string
@@ -31,6 +31,7 @@ interface Props {
   showDuration?: boolean
   showOptions?: boolean
   numberLabel?: number | string,
+  extras?: ReactNode
   className?: string,
 }
 
@@ -48,10 +49,11 @@ function Track({
   showActive = true,
   showDuration = true,
   showOptions = false,
+  extras = null,
   numberLabel = '',
   className = ""
 }: Props) {
-  const { player, track: playingTrack } = useSpotifyPlayer() as any
+  const { track: playingTrack } = useSpotifyPlayer() as any
   const [large, medium, small] = track?.album?.images || []
   const image = medium || large || small
 
@@ -110,6 +112,7 @@ function Track({
                 <LinkToArtist artists={track.artists} className="text-nowrap" />
                 {(track?.album?.id && showAlbum) && <>• <LinkToAlbum album={track.album} className="text-nowrap" /></>}
               </div>
+              { extras }
             </div>
             {
               showLike ?

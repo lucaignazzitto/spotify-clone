@@ -1,5 +1,4 @@
 'use client'
-import { observer } from "mobx-react-lite"
 import Spinner from "@/components/Loader/Spinner"
 import Link from "next/link"
 import LinkToArtist from '@/components/Artists/LinkToArtist'
@@ -64,4 +63,4 @@ function PlayingTrack ({ track, showLike = true, isLoading = false, className = 
   )
 }
 
-export default observer(PlayingTrack)
+export default PlayingTrack

@@ -24,6 +24,7 @@ class SpotifyToken {
     'user-follow-read',
     'user-follow-modify',
     'user-library-read',
+    'user-read-recently-played',
     'user-library-modify',
     'user-read-currently-playing',
     'user-read-playback-state',

@@ -1,0 +1,50 @@
+@use "@/styles/variables.scss" as variables;
+
+.addPlaylist {
+  margin-bottom: 10px !important;
+  border-bottom: 1px solid rgba(map-get(variables.$colors, $key: "white"), 0.2);
+
+  li {
+    padding: 15px 12px !important;
+  }
+}
+
+.playlistThumbnails {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &List {
+    max-height: inherit !important;
+    max-height: 600px;
+    overflow: hidden !important;
+
+    &Item {
+      position: relative;
+
+      &Image {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+    }
+
+    &Track {
+      position: sticky !important;
+      bottom: 0;
+      margin: 0 !important;
+      background: #4a4a4a;
+      padding: 20px 12px !important;
+      border-radius: 8px !important;
+    }
+  }
+}

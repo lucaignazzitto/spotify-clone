@@ -5,10 +5,10 @@
   font-family: inherit;
   font-weight: 500;
   border-radius: 8px;
-  padding: 12px 18px;
+  // padding: 12px 18px;
   display: inline-flex;
   font-weight: 400;
-  
+
   &-success {
     display: inline-flex;
     background-color: map-get($colors, $key: "green");
@@ -26,12 +26,12 @@
   }
 
   &-none {
-    padding: 0;
+    color: inherit !important;
+    background-color: initial !important;
+    border: none !important;
+    outline: none !important;
     margin: 0;
-    color: initial;
-    background-color: initial;
-    outline: none;
-    border: none;
+    padding: 0;
 
     &:focus,
     &:active,

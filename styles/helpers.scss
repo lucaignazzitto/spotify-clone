@@ -74,3 +74,21 @@
   font-weight: 500;
   color: map-get($colors, $key: muted);
 }
+
+.list-hoverable {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  margin-top: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(map-get($colors, $key: "white"), 0.2) !important;
+  }
+}
